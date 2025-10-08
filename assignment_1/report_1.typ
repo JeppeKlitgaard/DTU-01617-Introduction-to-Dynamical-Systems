@@ -323,7 +323,8 @@ $
   mat(0, 2; 0, 0)^2 = mat(0, 0; 0, 0) wider ⇒ wider k = 2
 $
 
-We obtain $vv(v)_2$ using the Jordan chain conditions, which can be used to recursively find generalized eigenvectors:
+We obtain $vv(v)_2$ using the Jordan chain conditions, which can be used to recursively find generalized eigenvectors @LectureNotesWeek3:
+
 $
   (mm(B) - λ mm(I)) vv(v)_k = vv(v)_(k-1)
 $
