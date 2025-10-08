@@ -27,6 +27,21 @@
 
 #let Span = math.op("Span")
 
+//! Cover Page
+
+#align(center, text(17pt)[
+  *02417 Times Series Analysis - Assignment 4*
+])
+
+#strong[Authors]:
+- Jeppe Klitgaard `<s250250@dtu.dk>`
+- Yunis Wirkus `<s250700@dtu.dk>`
+
+Date: 2025-10-08
+
+#pagebreak()
+
+
 //! Content
 = Problem 1 — Rescaling the Duffing Equation <sec:1>
 
