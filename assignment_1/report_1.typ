@@ -284,10 +284,149 @@ $ <eq:3_system>
 With $vv(x) : ℝ → ℝ^2$ and $vv(x)_0 = (x_01, x_02)^TT$.
 
 == Solution using Matrix Exponentials <sec:3a>
-TODO
+
+We invoke the Fundamental Theorem of Linear Systems as given by @perko[Chapter 1.4],
+which states that a system of the form @eq:3_system has a unique solution given by:
+$
+  vv(x)(t) = e^(mm(B) t) vv(x)_0
+$
+
+As such, our problem has been reduced to finding the matrix exponential $e^(mm(B) t)$.
+
+=== Solution using Coordinate Transformation <sec:3a_transform>
+While this problem is easily solved using @perko[Chapter 1.4, Corollary 4],
+we will instead opt for the idiomatic approach using a change of basis to cast the problem into its Jordan normal form. We do this by first determining the eigenvalues of $mm(B)$ to be $λ_1 = λ_2 = -1$ using the known result that the eigenvalues of an upper triangular matrix are given by its diagonal elements.
+
+We note that the eigenvalues are equal and that we thus have an _algebraic multiplicity_ of 2, but
+we only have a _geometric multiplicity_ of 1. As such, we need to find a _generalized eigenvector_ in addition to the _regular eigenvector_.
+
+The eigenvectors, $vv(v)$ are found by solving the familiar equation:
+$
+  (mm(B) - λ mm(I)) vv(v) = 0
+$
+
+Which trivially yields the eigenvector:
+$
+vv(v)_1 = (1, 0)^TT
+$
+
+As dictated by @perko[Chapter 1.7], we may find the generalized eigenvector $vv(v)_2$ by solving:
+$
+  (mm(B) - λ mm(I))^k vv(v) = 0
+$
+
+Where $k$ is the _degree of nilpotency_ of the matrix $(mm(B) - λ mm(I))$, which we find as:
+$
+  mat(0, 2; 0, 0)^2 = mat(0, 0; 0, 0) wider ⇒ wider k = 2
+$
+
+Thus, we find $vv(v)_2$ by solving:
+$
+  (mm(B) - λ mm(I))^2 vv(v)_2 = mm(0) med vv(v)_2 = 0
+$
+
+We are thus free to chose any vector that is not a multiple of $vv(v)_1$ as our generalized eigenvector such as:
+$
+  vv(v)_2 = (0, 1\/2)^TT
+$
+
+As explained in @perko[Chapter 1.6], we may not construct an invertible matrix $mm(P)$ using our eigenvectors as columns:
+$
+  mm(P) = mat(vv(v)_1, vv(v)_2) = mat(1, 0; 0, 1\/2)
+$
+
+Which transforms $mm(B)$ into its Jordan normal form $mm(C)$:
+$
+  mm(C) = mm(P)^(-1) mm(B) mm(P) = mat(1, 0; 0, 2) mat(-1, 2; 0, -1) mat(1, 0; 0, 1\/2) = mat(-1, 1; 0, -1)
+$
+
+Which we confirm as a Jordan normal form matching _Case II_ of @perko[Chapter 1.5], allowing us to characterise the system as an _improper stable node_ given $λ_1 = λ_2 < 0$.
+
+We may now leverage the properties described in @perko[Chapter 1.3] to find:
+$
+  e^(mm(B) t) = mm(P) e^(mm(C) t) mm(P)^(-1)
+$
+
+Where in the case of $mm(C) = mat(λ, 1; 0, λ)$ we have the known result that:
+$
+  e^(mm(C) t) = e^(λ t) mat(1, t; 0, 1)
+$
+
+Which yield the solution:
+$
+  e^(mm(B) t) = mm(P) e^(mm(C) t) mm(P)^(-1) = mat(1, 0; 0, 1\/2) e^(-t) mat(1, t; 0, 1) mat(1, 0; 0, 2) = e^(-t) mat(1, 2t; 0, 1)
+$
+
+Such that the solution to @eq:3_system:
+$
+  vv(x)(t) = e^(-t) mat(1, 2t; 0, 1) vv(x)_0
+$
+
+=== Alternative Approach <sec:3a_alt>
+
+The treatment above was rather cumbersome, but was undertaken to practice the method of transforming to Jordan normal form and back.
+
+Given the rather simple form of $mm(B)$, we may have instead opted for a more direct approach to finding the matrix exponential.
+
+As before, we will utilise the Fundamental Theorem of Linear Systems as given by @perko[Chapter 1.4],
+such that the problem has been reduced to finding the matrix exponential $e^(mm(B) t)$.
+
+We may decompose $mm(e^(mm(B) t))$ as follows:
+$
+  mm(e^(mm(B) t)) = exp(mat(-t, 2t; 0, -t))
+  &= exp(mat(-t, 0; 0, -t) + mat(0, 2t; 0, 0))\
+  &= exp(-t mm(I) + mat(0, 2t; 0, 0))\
+$
+
+We seek to prove that $-t mm(I)$ and $mat(0, 2t; 0, 0)$ commute, which is trivial upon noting that $t mm(I)$ is a _scalar matrix_ and thus commutes with all matrices of the same dimension. This enables the decomposition of the exponential of a sum into a product of exponentials as per @perko[Chapter 1.3, Proposition 2]:
+$
+  mm(e^(mm(B) t))
+  &= exp(-t mm(I) + mat(0, 2t; 0, 0))\
+  &= e^(-t mm(I)) exp(mat(0, 2t; 0, 0))\
+  &= e^(-t) e^mm(I) exp(mat(0, 2t; 0, 0))
+$
+
+We can now evaluate $exp(mat(0, 2t; 0, 0))$ using the definition of the matrix exponential as a power series:
+$
+  e^(mm(S)) = lim_(n → ∞) sum_(k=0)^n mm(S)^k/k!
+$
+
+Where we note that $mm(S) = mat(0, 2t; 0, 0)$ is _nilpotent_ of degree 2 as $mm(S)^2 = mm(0)$, such that the power series truncates after the first order term:
+$
+  exp(mat(0, 2t; 0, 0)) = mat(0, 2t; 0, 0)
+$
+
+Combining these results, we find:
+$
+  mm(e^(mm(B) t)) = e^(-t) mat(1, 2t; 0, 1)
+$
+
+Which is consistent with the treatment in @sec:3a_transform, yielding the same solution to @eq:3_system:
+$
+  vv(x)(t) = e^(-t) mat(1, 2t; 0, 1) vv(x)_0
+$
 
 == Phase Portrait and Stability <sec:3b>
-TODO
+
+Our solutions to @sec:3a can aid us in sketching the phase portrait of the system.
+
+The degenerate eigenvalue $λ_1 = λ_2 = -1 < 0$ indicates that the system is _stable_ at the stationary point $vv(x) = (0, 0)^TT$.
+
+As such, for all points (except the trivial case of the origin), we expect the trajectories to point towards the origin as $t → ∞$. From @perko[Chapter 1.5, Case II], we know that the trajectories will be tangent to the eigenvector $vv(v)_1 = (1, 0)^TT$ as they approach the origin.
+
+Lastly, we consider the coordinate transformation matrix $mm(P) = mat(1, 0; 0, 1/2)$ from @sec:3a_transform, which indicates that the $y$-coordinate is scaled by a factor of $1/2$ in the eigenbasis. This means that the trajectories will be compressed in the $y$-direction relative to the $x$-direction,
+which will be largely inconsequential for the sketch of the phase portrait.
+
+With this, we are able to sketch the phase portrait of the system as shown in @fig:3b.
+
+// Note: This can easily be validated using https://choosedews.github.io/PhasePlane/
+#figure(
+  image("diagram_3b.jpg", height: 8cm),
+  caption: [Phase portrait of the system showing trajectories approaching the stable, improper node at the origin.],
+) <fig:3b>
 
 == Invariant Sets and Subspaces <sec:3c>
+
 TODO
+
+#bibliography("refs.bib")
