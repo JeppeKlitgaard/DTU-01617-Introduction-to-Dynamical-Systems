@@ -9,8 +9,8 @@
   margin: (
     top: 1.5cm,
     bottom: 1.5cm,
-    left: 1.5cm,
-    right: 2.5cm,
+    left: 2.0cm,
+    right: 3.0cm,
   )
 )
 
@@ -23,6 +23,8 @@
 #let vv = mathformatter(underbars: 0, bold: true, upright: true)
 #let mm = mathformatter(underbars: 0, bold: true, upright: true)
 #set math.mat(delim:"[")
+
+#let Span = math.op("Span")
 
 //! Content
 = Problem 1 — Rescaling the Duffing Equation <sec:1>
@@ -427,6 +429,42 @@ With this, we are able to sketch the phase portrait of the system as shown in @f
 
 == Invariant Sets and Subspaces <sec:3c>
 
-TODO
+We understand an invariant set to be a set such that if the system starts in the set, it remains in the set for all time $t > 0$. We recall from @perko[Chapter 1.9] that we may write the phase space as
+the outer product of the stable, unstable, and center subspaces given by $E^s$, $E^u$, and $E^c$ respectively:
+$
+  ℝ^2 = E^s ⊕ E^u ⊕ E^c
+$
+
+Where the subspaces may be found using the spans of the eigenvectors corresponding to the eigenvalues with negative, positive, and zero real parts respectively, for $i ∈ {1, 2}$:
+$
+  E^s &= Span{vv(v)_i | Re(λ_i) < 0}\
+  E^u &= Span{vv(v)_i | Re(λ_i) > 0}\
+  E^c &= Span{vv(v)_i | Re(λ_i) = 0}\
+$
+
+As such, we find using the eigenvectors $λ_1 = λ_2 = -1 < 0$:
+$
+  E^s = ℝ^2 wider E^u = {0} wider E^c = {0}
+$
+
+We may subdivide the stable subspace, which in this case is the entire phase space, smaller invariant sets as well. Trivially, the stationary point at the origin is an invariant set:
+$
+  {(0, 0)^TT} ⊂ E^s
+$
+
+Additionally, as illustrated by the sketch in @fig:3b and by inspection of @eq:3_system, we note that
+the first axis itself is an invariant set, as any point on the axis will remain on the axis for all time $t > 0$:
+$
+  {(x_1, 0)^TT | x_1 ∈ ℝ} ⊂ E^s
+$
+
+Trivially, the entire phase space is of course also an invariant set.
+
+In conclusion, we find the following invariant sets:
+$
+  {(0, 0)^TT} ⊂ {(x_1, 0)^TT | x_1 ∈ ℝ} ⊂ ℝ^2
+$
+
+Which are all stable invariant sets.
 
 #bibliography("refs.bib")
