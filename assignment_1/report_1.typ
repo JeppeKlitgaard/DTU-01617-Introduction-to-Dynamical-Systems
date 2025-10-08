@@ -23,6 +23,7 @@
 #let vv = mathformatter(underbars: 0, bold: true, upright: true)
 #let mm = mathformatter(underbars: 0, bold: true, upright: true)
 #set math.mat(delim:"[")
+#set math.vec(delim:"[")
 
 #let Span = math.op("Span")
 
@@ -312,7 +313,7 @@ $
 vv(v)_1 = (1, 0)^TT
 $
 
-As dictated by @perko[Chapter 1.7], we may find the generalized eigenvector $vv(v)_2$ by solving:
+As dictated by @perko[Chapter 1.7], we may find the generalized eigenvector $vv(v)_2$ which satisfies:
 $
   (mm(B) - λ mm(I))^k vv(v) = 0
 $
@@ -322,17 +323,23 @@ $
   mat(0, 2; 0, 0)^2 = mat(0, 0; 0, 0) wider ⇒ wider k = 2
 $
 
+We obtain $vv(v)_2$ using the Jordan chain conditions, which can be used to recursively find generalized eigenvectors:
+$
+  (mm(B) - λ mm(I)) vv(v)_k = vv(v)_(k-1)
+$
+
 Thus, we find $vv(v)_2$ by solving:
 $
-  (mm(B) - λ mm(I))^2 vv(v)_2 = mm(0) med vv(v)_2 = 0
+  (mm(B) - λ mm(I)) vv(v)_2 &= vv(v)_1\
+  mat(0, 2; 0, 0) vv(v)_2 &= vec(1, 0)\
 $
 
-We are thus free to chose any vector that is not a multiple of $vv(v)_1$ as our generalized eigenvector such as:
+From which we find a general solution, from which we may pick $c=0$ to obtain a particular solution:
 $
-  vv(v)_2 = (0, 1\/2)^TT
+  vv(v)_2 = (c, 1\/2)^TT = (0, 1\/2)^TT
 $
 
-As explained in @perko[Chapter 1.6], we may not construct an invertible matrix $mm(P)$ using our eigenvectors as columns:
+As explained in @perko[Chapter 1.6], we may now construct an invertible matrix $mm(P)$ using our eigenvectors as columns:
 $
   mm(P) = mat(vv(v)_1, vv(v)_2) = mat(1, 0; 0, 1\/2)
 $
@@ -385,7 +392,7 @@ $
   mm(e^(mm(B) t))
   &= exp(-t mm(I) + mat(0, 2t; 0, 0))\
   &= e^(-t mm(I)) exp(mat(0, 2t; 0, 0))\
-  &= e^(-t) e^mm(I) exp(mat(0, 2t; 0, 0))
+  &= e^(-t) mm(I) exp(mat(0, 2t; 0, 0))\
 $
 
 We can now evaluate $exp(mat(0, 2t; 0, 0))$ using the definition of the matrix exponential as a power series:
@@ -395,12 +402,12 @@ $
 
 Where we note that $mm(S) = mat(0, 2t; 0, 0)$ is _nilpotent_ of degree 2 as $mm(S)^2 = mm(0)$, such that the power series truncates after the first order term:
 $
-  exp(mat(0, 2t; 0, 0)) = mat(0, 2t; 0, 0)
+  exp(mat(0, 2t; 0, 0)) = mm(I) + mat(0, 2t; 0, 0) + mm(0) = mat(1, 2t; 0, 1)
 $
 
 Combining these results, we find:
 $
-  mm(e^(mm(B) t)) = e^(-t) mat(1, 2t; 0, 1)
+  mm(e^(mm(B) t)) = e^(-t) mm(I) mat(1, 2t; 0, 1) = e^(-t) mat(1, 2t; 0, 1)
 $
 
 Which is consistent with the treatment in @sec:3a_transform, yielding the same solution to @eq:3_system:
