@@ -30,14 +30,14 @@
 //! Cover Page
 
 #align(center, text(17pt)[
-  *02417 Times Series Analysis - Assignment 4*
+  *01617 Introduction to Dynamical Systems (E25) - Assignment 1*
 ])
 
 #strong[Authors]:
 - Jeppe Klitgaard `<s250250@dtu.dk>`
 - Yunis Wirkus `<s250700@dtu.dk>`
 
-Date: 2025-10-08
+Date: 2025-10-09
 
 #pagebreak()
 
