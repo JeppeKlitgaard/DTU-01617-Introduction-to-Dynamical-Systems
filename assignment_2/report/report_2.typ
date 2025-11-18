@@ -45,79 +45,158 @@ Date: 2025-11-28
 //! Content
 = Problem 1 — The Duffing Equation <sec:1>
 
-We are given the Duffing equation:
+We are given another flavour of the Duffing equation:
 $
-  M dv(X, T, 2) + α dv(X, T) = k X - κ X^3 + A sin(Ω T)
+  dot.double(x)_1 &= f(x_1, x_2) = mu x_1 - x_1^3 \
+$
+
+or equivalently as a system of first order ODEs:
+
+$
+  dot(x)_1 &= f_1(x_1, x_2) = x_2 \
+  dot(x)_2 &= f_2(x_1, x_2) = mu x_1 - x_1^3
 $ <eq:1_duffing_original>
 
-Into which we introduce the following linear transformations of the coordinates $X$ and $T$:
-$
-  T = k_t t wider X(T) = k_x x(t)
-$ <eq:1_substitutions>
+with $mu$ and $(x_1, x_2) in RR^2$. We use the suppressing notation for $x_(1,2)(t): RR^+ arrow RR$, without indicating the dependence on time $t$ explicitly. Further, we use the common dot notation $dot(x)_(1,2) = frac(d x_(1,2), d t)$, analogously for higher order derivatives.
 
-We consider the variable transformation of the first and second derivatives using the chain rule:
-$
-  dv(X, T) &= dv(X, x) dv(x, t) dv(t, T) = k_x/k_t dv(x, t)\
-  dv(X, T, 2) &= dv(, T) [dv(X, T)] = dv(, t) dv(t, T)[k_x/k_t dv(x, t)] = k_x/k_t^2 dv(x, t, 2)
-$ <eq:1_derivative_transformations>
+This is a common form of the Duffing equation, describing a dampened and driven oscillator with a non-linear restoring force @ REF. 
 
-Plugging @eq:1_substitutions and @eq:1_derivative_transformations into @eq:1_duffing_original, we obtain:
+== Finding critical points <sec:1a>
+
+We wish to find values of $x_1, x_2$ such that $f_1(x_1, x_2) = dot(x)_1 = 0$ and $f_2(x_1, x_2) = dot(x)_2 = 0$. Thus, we find that: 
 
 $
-  M k_x/k_t^2 dv(x, t, 2) + α k_x/k_t dv(x, t) = k k_x x - κ k_x^3 x^3 + A sin(Ω k_t t)
-$ <eq:1_duffing_substituted_1>
-
-== Finding the Scaling Factors <sec:1a>
-We seek to find rescaling factors $k_x, k_t$ such that we obtain the following form, correponding to normalisation of the force term $f(X) = k X - κ X^3$:
-$
-  dv(x, t, 2) + β dv(x, t) = x - x^3 + a sin(ω t)
-$ <eq:1_duffing_target>
-
-We impose the condition that the coefficient on $dv(x, t, 2)$ must be $1$ by dividing @eq:1_duffing_substituted_1 through by $M k_x/k_t^2$:
-
-$
-  dv(x, t, 2) + (α k_t)/M dv(x, t) = (k k_t^2)/M x - (κ k_t^2 k_x^2)/M x^3 + (A k_t^2)/(M k_x) sin(Ω k_t t)
-$ <eq:1_duffing_substituted_2>
-
-Our remaining normalisation conditions imply:
-$
-  (k k_t^2)/M &= 1 quad &&<=> quad k_t &&= ±sqrt(M/k)\
-  (κ k^2_x k_t^2)/M &= 1 quad &&<=> quad k_x &&= ±sqrt(M/(κ k_t^2))
-$ <eq:1_conditions_1>
-
-Where we shall take the positive roots for both $k_t$ and $k_x$ for reasons discussed below in @sec:1b,
-such that:
-$
-  k_t = sqrt(M/k) wider and wider k_x = sqrt(k/κ)
-$ <eq:1_scaling_factors>
-
-Where we note that $k_x$ appears to parameterise the relative strength of the linear and non-linear components of the force term $f(X)$, while $k_t$ appears to parameterise the relative strength of the inertial term and force term $f(X)$.
-
-Plugging in our scaling factors from @eq:1_scaling_factors into @eq:1_duffing_substituted_2, we obtain:
-$
-  dv(x, t, 2) + α/sqrt(k M) dv(x, t) = x - x^3 + A sqrt(κ/k^3) sin(Ω sqrt(M/k) t)
+  dot(x)_1 &= 0 quad &&arrow.double quad x_2 = 0 \
+  dot(x)_2 &= x_1(mu - x_1^2) = 0 quad &&arrow.double quad x_1 in {0, +sqrt(mu), -sqrt(mu)} \
 $
 
-Which when compared against @eq:1_duffing_target reveals the rescales parameters as:
+From this, we can conclude that the critical points of the system are given by:
+
 $
-β &= α/sqrt(k M) wider a = A sqrt(κ/k^3) wider ω = Ω sqrt(M/k)
+  x^* in cases(
+    {(0,0)} quad &forall mu in RR,
+    {(-sqrt(mu), 0), (0,0), (sqrt(mu), 0)} quad &forall mu > 0,
+    {(0,0), (-i sqrt(|mu|), 0), (i sqrt(|mu|), 0)} quad &forall mu < 0,
+  )
+$<eq:1_all_critical_points>
+
+We will only consider real critical points in the following analysis. Hence we will investigate the system behaviour around the critical points 
+
+$
+  x^* in cases(
+    {(-sqrt(mu), 0), (0,0), (sqrt(mu), 0)} quad &mu > 0,
+    {(0,0)} quad &mu ≤ 0
+  )
+$<eq:1_critical_points>
+
+for easier reference later, we enumerate the critical points as follows: 
+$
+  x^*_0 = (0,0) quad x^*_1 = (sqrt(mu), 0) quad x^*_2 = (-sqrt(mu), 0)
 $
 
-== Choice of Scaling Factors <sec:1b>
+\
+== Stability of critical points<sec:1b>
 
-There is some ambiguity in the question regarding choice of scaling factors $k_x, k_t$.
+We will analyse the stability of the critical points found in @eq:1_critical_points by computing the Jacobian matrix of the system at each critical point and evaluating its eigenvalues. Here we will exclude the case for $mu=0$.
 
-Firstly, one could have chosen a different _target equation_ than @eq:1_duffing_target, for examply by choosing to normalise the driving term $A sin(Ω T)$ instead of the restoring force term $k X - κ X^3$.
+The Jacobian matrix $J = D_f$ of the system/vectorfield $bold(f) = (f_1, f_2)^T$ from @eq:1_duffing_original given by:
 
-This choice of scaling may benefit subsequent analysis of the system in some cases.
+$
+  D_f(x_1, x_2) = 
+  mat(
+    partial(f_1, x_1), partial(f_1, x_2); 
+    partial(f_2, x_1), partial(f_2, x_2)
+  ) 
+  = mat(
+    0, 1; 
+    mu - 3 x_1^2, 0
+  )
+$<eq:1_jacobian>
 
-Alternatively, the question may refer to the ambiguity that arose in the choice of sign for $k_x, k_t$ in @eq:1_conditions_1. We consider that the sign choice does not affect those terms where the scaling factors appear squared, but does affect the linear dampening term $α κ_t / M dv(x, t)$ and the driving term $(A k_t^2)/(M k_x) sin(Ω k_t t)$.
+At the *critical point $x^*_0 = (0,0)$*, we find the Jacobian:
+$
+  D_f(x^*_0) = 
+  mat(
+    0, 1; 
+    mu, 0
+  ) 
+  quad arrow.double quad 
+  p_(x^*_0)(λ) = 
+  det(
+    mat(
+      λ, -1
+      ; -mu, λ
+    )
+  ) = λ^2 - mu = 0
+  quad arrow.double quad
+  λ_(1,2) = ± sqrt(mu)
+$
 
-We note that a choice of $k_t < 0$ would lead to a sign change in the dampening term, which would imply
-that the system is being driven rather than dampened. This is would be considered unphysical for most systems under consideration, so we may discard this choice.
+As the eigenvalues are depended on the parameter $mu$, we consider two cases. As afore mentioned, excluding the degenerate case $mu=0$, where $λ_(1,2) = 0$ is a algebraic multiplicity of 2, thus a critical case with non-hyperbolic behaviour @ REF, hence initially inconclusive.
 
-Similarly, a choice of $k_x < 0$ would lead to a sign change in the driving term, which would imply a phase shift of $π$ in the driving force. While this is not unphysical, it is a trivial phase shift that does not affect the dynamics of the system. For this reason, it is reasonable to discard this choice as well.
+1. If $mu>0$: eigenvalues are real, opposite signs $lambda_1=+ sqrt(mu), lambda_2=-sqrt(mu)$. That is a *saddle point* with one stable (negative eigenvalue $lambda_2$) and one unstable direction. Saddles are hyperbolic but unstable as trajectories are repelled in one direction and attracted in another.
 
+2. If $mu < 0$: eigenvalues are pure imaginary $lambda = plus.minus i sqrt(|mu|)$. This indicates that the linearization via the Jacobian only gives a _linear center_ (center for the linearization). For conclusions relating back to the non-linear system we need more information.
+
+Purely imaginary eigenvalues indicate _neutral stability_ in the linearized system, meaning that trajectories neither converge nor diverge from the critical point, but rather orbit around it. However, this does not guarantee stability in the non-linear system, as non-linear effects can lead to different behaviours.
+
+At the *critical points $x^*_(1,2) = (plus.minus sqrt(mu), 0)$*, which only exists for $mu > 0$, we find the Jacobian:
+
+$
+  D_f(x^*_(1,2)) &= 
+  mat(
+    0, 1; 
+    mu - 3(mu), 0
+  ) =
+  mat(
+    0, 1; 
+    -2 mu, 0
+  ) \
+  &arrow.double quad 
+  p_(x^*_(1,2))(λ) = 
+  det(
+    mat(
+      λ, -1
+      ; 2 mu, λ
+    )
+  ) = λ^2 + 2 mu = 0 \
+  &arrow.double quad
+  λ_(1,2) = ± i sqrt(2 mu)
+$
+
+Again, these eigenvalues are purely imaginary, indicating _neutral stability_ in the linearized system. As before, this does not guarantee stability in the non-linear system, and further analysis would be required to determine the actual stability of these critical points.
+
+*REVIEW*
+Summing up, we can only definitely classify one of the critical points $x^*_0$ in @eq:1_critical_points as a saddle point (unstable) for $mu > 0$. The other critical points exhibit purely imaginary eigenvalues, indicating _neutral stability_ in the linearized system, but their actual stability in the non-linear system remains inconclusive without further analysis.
+For $mu < 0$, only $x^*_0$ exists and exhibits purely imaginary eigenvalues, again indicating _neutral stability_ in the linearized system, but inconclusive for the non-linear system.
+
+\
+== Sketching the Phase Portrait & Flow <sec:1c>
+
+\
+*Clarify: Sketch flow 'in' the phase portrait? Meaning plotting trajectories of the solution in the phase portrait?*
+
+#figure(
+  grid(
+    columns: 2,
+    gutter: 1em,
+    grid.cell(
+      image("../img/1_c_mu_gt_1.png",      
+      height: 7cm)
+    ),
+    grid.cell(
+      image("../img/1_c_mu_lt_1.png",      
+      height: 7cm)
+    )
+  ),
+  caption: [Sketch of the phase plane of vectorfield $bold(f)$ from @eq:1_duffing_original for $mu > 0$ (left) and $mu < 0$ (right). Critical points are marked in red (saddles) and blue (centers). Arrows indicate the flow of the system.],
+)
+
+- insert hand-drawn sketches here
+- comment on the plot?!
+
+
+#pagebreak()
 = Problem 2 — Dynamical Analysis on Scalar First Order ODE
 
 We are given the following first order ODE:
@@ -139,12 +218,14 @@ $
   f(2) &= -9\
 $
 
-We sketch the function $f(x)$ and its stationary points, as shown below in @fig:2a
+We sketch the function $f(x)$ and its stationary points, as shown below in @ fig:2a
 
+/* 
 #figure(
   image("diagram_2a.jpg", height: 6cm),
   caption: [Sketch of $f(x)$ with stationary points at $x∈ {-1, 1}$.],
 ) <fig:2a>
+*/
 
 == Solution Flow and Stability
 
@@ -206,23 +287,27 @@ $
 Thus we have _half-stability_ at the point $x_0 = -1$, where the system is stable for perturbations from the left, but unstable for perturbations from the right.
 
 We sketch the solution flow of the system in a phase line diagram using the information we have obtained
-as shown in @fig:2b.
+as shown in @ fig:2b.
 
+/*
 #figure(
   image("diagram_2b.jpg", height: 4cm),
   caption: [Solution flow of the system along the $x$-axis, showing stability of the stationary points.],
 ) <fig:2b>
+*/
 
 As noted above, it is not possible to determine the stability of the point $x_0 = -1$ from the linear approximation alone, as $f'(-1) = 0$.
 
 == Sketching Solution Trajectories <sec:2c>
 
-We sketch the solutions $ϕ_t (x_0)$ as a function of time $t > 0$ as shown in @fig:2c.
+We sketch the solutions $ϕ_t (x_0)$ as a function of time $t > 0$ as shown in @ fig:2c.
 
+/*
 #figure(
   image("diagram_2c.jpg", height: 9cm),
   caption: [Sketch of solution trajectories $ϕ_t(x_0)$ for various initial conditions $x_0$.],
 ) <fig:2c>
+*/
 
 Where the half-stability of the point $x_0 = -1$ is evident from the trajectories approaching the point from below, but diverging away from it for initial conditions above the point.
 
@@ -442,13 +527,16 @@ As such, for all points (except the trivial case of the origin), we expect the t
 Lastly, we consider the coordinate transformation matrix $mm(P) = mat(1, 0; 0, 1/2)$ from @sec:3a_transform, which indicates that the $y$-coordinate is scaled by a factor of $1/2$ in the eigenbasis. This means that the trajectories will be compressed in the $y$-direction relative to the $x$-direction,
 which will be largely inconsequential for the sketch of the phase portrait.
 
-With this, we are able to sketch the phase portrait of the system as shown in @fig:3b.
+With this, we are able to sketch the phase portrait of the system as shown in @ fig:3b.
 
 // Note: This can easily be validated using https://choosedews.github.io/PhasePlane/
+
+/*
 #figure(
   image("diagram_3b.jpg", height: 8cm),
   caption: [Phase portrait of the system showing trajectories approaching the stable, improper node at the origin.],
 ) <fig:3b>
+*/
 
 == Invariant Sets and Subspaces <sec:3c>
 
@@ -475,7 +563,7 @@ $
   {(0, 0)^TT} ⊂ E^s
 $
 
-Additionally, as illustrated by the sketch in @fig:3b and by inspection of @eq:3_system, we note that
+Additionally, as illustrated by the sketch in @ FIG and by inspection of @eq:3_system, we note that
 the first axis itself is an invariant set, as any point on the axis will remain on the axis for all time $t > 0$:
 $
   {(x_1, 0)^TT | x_1 ∈ ℝ} ⊂ E^s
