@@ -78,7 +78,7 @@ $
     {(-sqrt(mu), 0), (0,0), (sqrt(mu), 0)} quad &forall mu > 0,
     {(0,0), (-i sqrt(|mu|), 0), (i sqrt(|mu|), 0)} quad &forall mu < 0,
   )
-$<eq:1_all_critical_points>
+$<eq:1a_all_critical_points>
 
 We will only consider real critical points in the following analysis. Hence we will investigate the system behaviour around the critical points 
 
@@ -87,7 +87,7 @@ $
     {(-sqrt(mu), 0), (0,0), (sqrt(mu), 0)} quad &mu > 0,
     {(0,0)} quad &mu ≤ 0
   )
-$<eq:1_critical_points>
+$<eq:1a_critical_points>
 
 for easier reference later, we enumerate the critical points as follows: 
 $
@@ -97,7 +97,7 @@ $
 \
 == Stability of critical points<sec:1b>
 
-We will analyse the stability of the critical points found in @eq:1_critical_points by computing the Jacobian matrix of the system at each critical point and evaluating its eigenvalues. Here we will exclude the case for $mu=0$.
+We will analyse the stability of the critical points found in @eq:1a_critical_points by computing the Jacobian matrix of the system at each critical point and evaluating its eigenvalues. Here we will exclude the case for $mu=0$.
 
 The Jacobian matrix $J = D_f$ of the system/vectorfield $bold(f) = (f_1, f_2)^T$ from @eq:1_duffing_original given by:
 
@@ -111,7 +111,7 @@ $
     0, 1; 
     mu - 3 x_1^2, 0
   )
-$<eq:1_jacobian>
+$<eq:1b_jacobian>
 
 At the *critical point $x^*_0 = (0,0)$*, we find the Jacobian:
 $
@@ -167,7 +167,7 @@ $
 Again, these eigenvalues are purely imaginary, indicating _neutral stability_ in the linearized system. As before, this does not guarantee stability in the non-linear system, and further analysis would be required to determine the actual stability of these critical points.
 
 *REVIEW*
-Summing up, we can only definitely classify one of the critical points $x^*_0$ in @eq:1_critical_points as a saddle point (unstable) for $mu > 0$. The other critical points exhibit purely imaginary eigenvalues, indicating _neutral stability_ in the linearized system, but their actual stability in the non-linear system remains inconclusive without further analysis.
+Summing up, we can only definitely classify one of the critical points $x^*_0$ in @eq:1a_critical_points as a saddle point (unstable) for $mu > 0$. The other critical points exhibit purely imaginary eigenvalues, indicating _neutral stability_ in the linearized system, but their actual stability in the non-linear system remains inconclusive without further analysis.
 For $mu < 0$, only $x^*_0$ exists and exhibits purely imaginary eigenvalues, again indicating _neutral stability_ in the linearized system, but inconclusive for the non-linear system.
 
 \
@@ -190,10 +190,87 @@ For $mu < 0$, only $x^*_0$ exists and exhibits purely imaginary eigenvalues, aga
     )
   ),
   caption: [Sketch of the phase plane of vectorfield $bold(f)$ from @eq:1_duffing_original for $mu > 0$ (left) and $mu < 0$ (right). Critical points are marked in red (saddles) and blue (centers). Arrows indicate the flow of the system.],
-)
+)<fig:1c>
 
 - insert hand-drawn sketches here
 - comment on the plot?!
+
+\
+== Analytical Homoclinic Orbit (1st Quadrant) <sec:1d>
+
+Before we begin discussions, it helps to formulate a more intuitive definition of _homoclinic orbits_ (@ REF). A homoclinic orbit is a trajectory in the phase space of a dynamical system that starts and ends at the same saddle point. In other words, it is a path that leaves a saddle point along its unstable manifold and then returns to the same saddle point along its stable manifold.
+In this case, it does a tour around other critical points in between.
+
+In the phase portrait for $mu > 0$ (left figure in @fig:1c), we can observe homoclinic orbits associated with the saddle point $x^*_0$ at the origin $(0,0)$. These orbits leave the saddle point along its unstable manifold and return to it along its stable manifold, forming closed loops around the other critical points $x^*_(1,2)$ at $(plus.minus sqrt(mu), 0)$.
+
+Now we can determine a homeomorphic function $h in C^1$, that can identify / trace these homoclinic orbits in the phase space. It is important to look at the function by each quadrant of the phase plane to prevserve injectivity. This functiion $h: RR arrow RR$ will describe a graph in the phase plane, i.e. $x_2 = h(x_1)$.
+
+To derive a first order differential equation for the solution of the graph $x_2 = h(x_1)$, along that graph curve, it must satisfy:
+
+$
+  frac(d x_2, d x_1) = frac(dot(x)_2, dot(x)_1) = frac(f_2(x_1, x_2), f_1(x_1, x_2)) = frac(mu x_1 - x_1^3, x_2) = frac(mu x_1 - x_1^3, h(x_1)) = frac(d h, d x_1)
+$<eq:1d_homoclinic_graph_condition>
+
+Hence, we can derive the first order ODE for $h(x_1)$:
+
+$
+  frac(d h, d x_1) = dot(h)(x_1) = (mu x_1 - x_1^3) / h(x_1)
+$<eq:1d_homoclinic_ode>
+
+This is homoclinic at the origin, as $h(0) = 0$ and the first quadrant satisfies $h(x_1) > 0$ for $x_1 > 0$.
+
+@eq:1d_homoclinic_ode is a separable first order ODE for $h(x_1)$, which we can solve by separating variables (multiplying LHS by $h(x_1)$ and RHS by $d x_1$ respectively) and integrating both sides:
+
+$
+  frac(d h, d x_1) &= (mu x_1 - x_1^3) / h(x_1) \
+  arrow.l.r.double quad quad quad quad 
+  h(x_1) d h &= (mu x_1 - x_1^3) d x_1 \
+  arrow.l.r.double quad quad quad 
+  ∫ h(x_1) d h &= ∫ (mu x_1 - x_1^3) d x_1 \
+  arrow.l.r.double quad quad quad quad 
+  1/2 h(x_1)^2 &= 1/2 mu x_1^2 - 1/4 x_1^4 + C \
+  arrow.l.r.double quad quad quad quad 
+  h(x_1)^2 &= mu x_1^2 - 1/2 x_1^4 + 2C
+$<eq:1d_homoclinic_solution_integral>
+
+Where $C in RR$ is the integration constant.
+
+Since we already established that the homoclinic orbit passes through the origin, we know that $h(0)=0$. And as $x_1$ for all $x^*_(0,1,2)$, we plug in $h(0)^2 = 2C = 0$ from @eq:1d_homoclinic_solution_integral to solve for $C=0$. Therefore:
+
+$
+  h(x_1)^2 &= mu x_1^2 - 1/2 x_1^4 \
+  h(x_1) &= plus.minus x_1 sqrt(mu - frac(x_1^2, 2)) \
+$<eq:1d_homoclinic_solution>
+
+For the first quadrant, we take the positive root, yielding the homoclinic orbit function:
+
+$
+  h(x_1)^+ = x_1 sqrt(mu - frac(x_1^2, 2)) quad quad forall x_1 in [0, sqrt(2 mu)]
+$
+
+Note that we can interpret the maximum possible value for $x_1 = sqrt(2 mu)$ (for the root to ne non-negative) as the turning point of the homoclinic orbit in the first quadrant, after which it returns to the origin along the stable manifold along the orbit on the fourth quadrant ($x_1 >0, x_2 < 0$). Thus it starts at the origin $h(x_1=0)=0$ and transitions into the fourth quadrant at $h(x_1 = sqrt(2 mu))=0$, see @fig:1c.
+
+\
+== Plotting the Homoclinic Orbit (1st quadrant) <sec:1e>
+
+#figure(
+  image("../img/1_e_homoclinic_orbit.png",      
+  height: 8cm),
+  caption: [Plot of the homoclinic orbit $x_2 = h(x_1)$ from @eq:1d_homoclinic_solution for $mu>0$. The orbit starts and ends at the saddle point at the origin $(0,0)$, forming a closed loop around the other critical points.],
+)<fig:1e>
+
+- comment on the plot?!
+
+\
+== Analytical Homoclinic Orbit (4th Quadrant) <sec:1f>
+
+Given the nature of @eq:1d_homoclinic_solution, for the fourth quadrant of the phase plot ($x_1 > 0, x_2 < 0$), it is merely taking the negative root of the homoclinic orbit function, i.e.: 
+
+$
+  h(x_1)^- = - x_1 sqrt(mu - frac(x_1^2, 2)) quad quad forall x_1 in [0, sqrt(2 mu)]
+$
+
+The resulting graph of $h$ can be seen in @fig:1e in light-green, which is a mirror of the first quadrant homoclinic orbit across the $x_1$-axis. All statements concerning turning points and behaviour apply analogously.
 
 
 #pagebreak()
@@ -281,7 +358,7 @@ This allows us to consider the stability of the point $x_0 = -1$ for time $t > 0
 sign of the initial perturbation $η_0$:
 $
   η_0 > 0 quad&⇒quad η(t) → +∞ &&quad "as" t → 1/(2 η_0)_- quad &&⇒ quad "unstable"\
-  η_0 < 0 quad&⇒quad η(t) → 0_- &&quad "as" t → ∞ quad&&⇒quad"stable from below"
+  η_0 < 0 quad&⇒quad η(t) → 0 - &&quad "as" t → ∞ quad&&⇒quad"stable from below"
 $
 
 Thus we have _half-stability_ at the point $x_0 = -1$, where the system is stable for perturbations from the left, but unstable for perturbations from the right.
@@ -363,7 +440,7 @@ $
 $ <eq:2_solution_interval>
 
 Where we have combined the integration constants into a single constant $t_0$ on the right hand side
-and exploited the fact that the arguments of the logarithms are positive in the interval $x ∈ ]-1; 1[$
+and exploited the fact that the arguments of the logarithms are positive in the interval $x ∈ -1; 1[$
 to drop the absolute values.
 
 == Limits of Interval Solution <sec:2e>
@@ -550,7 +627,7 @@ Where the subspaces may be found using the spans of the eigenvectors correspondi
 $
   E^s &= Span{vv(v)_i | Re(λ_i) < 0}\
   E^u &= Span{vv(v)_i | Re(λ_i) > 0}\
-  E^c &= Span{vv(v)_i | Re(λ_i) = 0}\
+  E^c &= Span{vv(v)i | Re(λ_i) = 0}\
 $
 
 As such, we find using the eigenvectors $λ_1 = λ_2 = -1 < 0$:
