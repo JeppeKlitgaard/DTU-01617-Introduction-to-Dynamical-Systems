@@ -43,7 +43,7 @@ Date: 2025-11-28
 
 
 //! Content
-= Problem 1 — Rescaling the Duffing Equation <sec:1>
+= Problem 1 — The Duffing Equation <sec:1>
 
 We are given the Duffing equation:
 $
