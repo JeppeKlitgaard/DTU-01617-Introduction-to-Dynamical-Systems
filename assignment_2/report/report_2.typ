@@ -314,10 +314,13 @@ $<eq:2d_lyapunov_function>
 
 The Lyapunov function needs to be positive definite, i.e. $V(x_1, x_2) > 0$ for all $(x_1, x_2) ≠ (0,0)$ and $V(0,0) = 0$. This is satisfied for @eq:2d_lyapunov_function, as both terms are squares and thus non-negative, and the only point where $V$ is zero is at the origin.
 
-Next, we compute the time derivative of $V$ along the trajectories of the system $bold(f)$ for $mu=0$:
+Next, we compute the time derivative of $V$ along the trajectories / solutions $x_1(t), x_2(t)$ of the system $bold(f)$ for $mu=0$:
 
 $
-  dot(V)(x_1, x_2) &= partial(V, x_1) dot(x)_1 + partial(V, x_2) dot(x)_2 \
+  dot(V)(x_1(t), x_2(t)) &= nabla_t V(x_1(t), x_2(t)) (dot(x)_1(t), dot(x)_2(t)) quad quad "via chain rule"\
+  &= partial V_(x_1) dot(x)_1 + partial V_(x_2) dot(x)_2 
+  quad quad quad quad quad quad quad quad 
+  "inserting into function"\
   &= x_1^3 dot(x)_1 + x_2 dot(x)_2 \
   &= x_1^3 x_2 + x_2 (mu - x_1^3) \
   &= x_1^3 x_2 + x_2 (- x_1^3) \
