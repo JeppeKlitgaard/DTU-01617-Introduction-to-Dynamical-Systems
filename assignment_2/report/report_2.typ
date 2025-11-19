@@ -345,4 +345,30 @@ As clearly visible in @fig:2e, the contours of the Lyapunov function $V(x_1, x_2
 *REVIEW*
 Further we observe, that the level sets along with trajectories of the vector field form elliptical closed orbits around the origin. The elliptical shape could be attributed to the stretch of the system along the $x_1$-axis, due to the quartic term in $V$ (@eq:2d_lyapunov_function), compared to only the quadratic term for $x_2$.
 
+
+\
+== Stability for $(0,0)$ at $mu=0$<sec:2f>
+The required Theorem from @perko[Chapther 2.11, p.151, Theorem 2] states:
+
+For when matrix $A$ of a linearized system has two zero eigenvalues, i.e. $det(A) = tr(A) = 0$, but $A≠0$, the system can be put into a 'normal' form:
+
+$
+  dot(x) &= y \
+  dot(y) &= a_k x^k [1+h(x)] + b_n x^n y [1+g(x)] + y^2 R(x,y) \
+$<eq:2f_perko_normal_form>
+
+where $h(x), g(x), R(x,y)$ are analytic in the neighborhood of the origin with $h(0) = g(0) = 0$ and $k ≥ 2, n ≥ 1$.
+
+#quote(attribution: [Perko])[
+  *Theorem 2* \
+  Let $k= 2m+1$ with $m ≥1$ in @eq:2f_perko_normal_form and let $lambda = b_n^2 + 4(m+1) a_k$. Then if $a_k > 0$, the origin is a topological saddle. If $a_k < 0$, the origin is \
+  (1) a focus or a center if $b_n=0$ and also if $b_n≠0$ and $n>m$ or if $n=m$ and $lambda < 0$, \
+  (2) a node if $b_n ≠ 0$, $n$ is an even number and $n < m$ and also if $b_n ≠ 0$, $n$ is an even number, $n =m$ and $lambda ≥0$ and \
+  (3) a critical point with an elliptic domain if $b_n ≠ 0$, $n$ is an odd number and $n < m$ and also if $b_n ≠ 0$, $n$ is an odd number, $n =m$ and $lambda ≥ 0$.
+]
+
+From this theorem, we can conclude that our system @eq:1_duffing_original at the critical point $(0,0)$ for $mu=0$ can be transformed into the normal form @eq:2f_perko_normal_form with: $k=3, a_k=-1, b_n=0, h(x)=0, R(x,y)=0$
+
+Thus, we have a focus or a center according to case (1) in the theorem, which is consistent with our earlier findings in @sec:2d using the Lyapunov function, where we concluded that the origin is a stable center (Lyapunov stable) but not asymptotically stable.
+
 #bibliography("refs.bib")
