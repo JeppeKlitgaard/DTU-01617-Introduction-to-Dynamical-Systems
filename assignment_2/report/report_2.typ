@@ -57,13 +57,14 @@ $
   dot(x)_2 &= f_2(x_1, x_2) = mu x_1 - x_1^3
 $ <eq:1_duffing_original>
 
-with $mu$ and $(x_1, x_2) in RR^2$. We use the suppressing notation for $x_(1,2)(t): RR^+ arrow RR$, without indicating the dependence on time $t$ explicitly. Further, we use the common dot notation $dot(x)_(1,2) = frac(d x_(1,2), d t)$, analogously for higher order derivatives.
+with $mu∈ℝ$ and $(x_1, x_2) in RR^2$. We use the suppressed notation for $x_(1,2)(t): RR^+ arrow RR$ such that $dot(x)_(1,2) = dv(x_(1, 2), t)$, with higher order derivatives being indicated by additional dots.
 
-This is a common form of the Duffing equation, describing a dampened and driven oscillator with a non-linear restoring force @ REF. 
+// TODO: REF
+This is a common form of the Duffing equation, describing a damped and driven oscillator with a non-linear restoring force @ REF.
 
 == Finding critical points <sec:1a>
 
-We wish to find values of $x_1, x_2$ such that $f_1(x_1, x_2) = dot(x)_1 = 0$ and $f_2(x_1, x_2) = dot(x)_2 = 0$. Thus, we find that: 
+We wish to find values of $x_1, x_2$ such that $f_1(x_1, x_2) = dot(x)_1 = 0$ and $f_2(x_1, x_2) = dot(x)_2 = 0$. Thus, we find that:
 
 $
   dot(x)_1 &= 0 quad &&arrow.double quad x_2 = 0 \
@@ -80,7 +81,7 @@ $
   )
 $<eq:1a_all_critical_points>
 
-We will only consider real critical points in the following analysis. Hence we will investigate the system behaviour around the critical points 
+Where the $μ<0$ case produces two complex critical points which are discarded due to the domain restriction $(x_1, x_2) ∈ ℝ^2$. Hence we will investigate the system behaviour around the critical points
 
 $
   x^* in cases(
