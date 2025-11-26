@@ -50,7 +50,7 @@ Date: 2025-11-28
 We are given another flavour of the Duffing equation:
 $
   dot.double(x)_1 &= f(x_1, x_2) = mu x_1 - x_1^3 \
-$
+$ <eq:1_duffing>
 
 or equivalently as a system of first order ODEs:
 
@@ -59,7 +59,7 @@ $
   dot(x)_2 &= f_2(x_1, x_2) = mu x_1 - x_1^3
 $ <eq:1_duffing_original>
 
-with $mu∈ℝ$ and $(x_1, x_2) in RR^2$. We use the suppressed notation for $x_(1,2)(t): RR^+ arrow RR$ such that $dot(x)_(1,2) = dv(x_(1, 2), t)$, with higher order derivatives being indicated by additional dots.
+with $mu∈ℝ$ and $(x_1, x_2) in E = RR^2$. We use the suppressed notation for $x_(1,2)(t): RR^+ arrow RR$ such that $dot(x)_(1,2) = dv(x_(1, 2), t)$, with higher order derivatives being indicated by additional dots.
 
 // TODO: REF
 This is a common form of the Duffing equation, describing a damped and driven oscillator with a non-linear restoring force @ REF.
@@ -76,17 +76,17 @@ $
 From this, we can conclude that the critical points of the system are given by:
 
 $
-  x^* in cases(
+  vv(x^*) in cases(
     {(0,0)} quad &forall mu in RR,
     {(-sqrt(mu), 0), (0,0), (sqrt(mu), 0)} quad &forall mu > 0,
-    {(0,0), (-i sqrt(|mu|), 0), (i sqrt(|mu|), 0)} quad &forall mu < 0,
+    {(0,0), cancel((-i sqrt(|mu|), 0)), cancel((i sqrt(|mu|), 0))} quad &forall mu < 0,
   )
 $<eq:1a_all_critical_points>
 
 Where the $μ<0$ case produces two complex critical points which are discarded due to the domain restriction $(x_1, x_2) ∈ ℝ^2$. Hence we will investigate the system behaviour around the critical points
 
 $
-  x^* in cases(
+  vv(x^*) in cases(
     {(-sqrt(mu), 0), (0,0), (sqrt(mu), 0)} quad &mu > 0,
     {(0,0)} quad &mu ≤ 0
   )
@@ -94,21 +94,21 @@ $<eq:1a_critical_points>
 
 for easier reference later, we enumerate the critical points as follows:
 $
-  x^*_0 = (0,0) quad x^*_1 = (sqrt(mu), 0) quad x^*_2 = (-sqrt(mu), 0)
-$
+  vv(x^*_0) = (0,0) quad vv(x^*_1) = (sqrt(mu), 0) quad vv(x^*_2) = (-sqrt(mu), 0)
+$ <eq:1a_critical_points_ref>
 
 
 == Stability of critical points<sec:1b>
 
 We will analyse the stability of the critical points found in @eq:1a_critical_points by computing the Jacobian matrix of the system at each critical point and evaluating its eigenvalues. Here we will exclude the case for $mu=0$.
 
-The Jacobian matrix $J = D_f$ of the system/vectorfield $bold(f) = (f_1, f_2)^T$ from @eq:1_duffing_original given by:
+The Jacobian matrix $A = D vv(f(vv(x)))$ of the system/vector field $vv(f) = (f_1, f_2)^TT ∈ C^1 (E)$ from @eq:1_duffing_original given by:
 
 $
-  D_f(x_1, x_2) =
+  D vv(f)(x_1, x_2) =
   mat(
-    partial(f_1, x_1), partial(f_1, x_2);
-    partial(f_2, x_1), partial(f_2, x_2)
+    pdv(f_1, x_1), pdv(f_1, x_2);
+    pdv(f_2, x_1), pdv(f_2, x_2)
   )
   = mat(
     0, 1;
@@ -116,9 +116,131 @@ $
   )
 $<eq:1b_jacobian>
 
-At the *critical point $x^*_0 = (0,0)$*, we find the Jacobian:
+=== Case: $μ < 0$ <sec:1b_mu_neg>
+
+We consider the case $μ < 0$ first, which only has a single critical point at the origin $vv(x^*_0) = (0,0)$,
+at which we linearise the system by finding the Jacobian matrix:
 $
-  D_f(x^*_0) =
+  A = D vv(f(vv(x^*_0))) = mat(
+    0, 1;
+    mu, 0
+  )
+$
+
+Which we obtain the eigenvalues $λ_i$ of by solving the characteristic polynomial:
+$
+  p_(x^*_0)(λ) = det(A - λ I) = λ^2 - μ = 0 ⇒ λ_(1,2) = ± sqrt(μ) = ± i sqrt(|μ|)
+$
+
+Which form a pure imaginary complex conjugate pair, indicating that the critical point is a _center_ for the linearised system. We seek to employ @perko[Chapter 2.10, Theorems 5 & 6], which requires that we investigate the symmetry of the vector field $vv(f)$. Using the definition of symmetry from @perko[Chapter 2.10, Definition 6], we consider a transformation $(t, x_1) → (-t, -x_1)$ applied to @eq:1_duffing:
+$
+
+  dot.double(x)_1 &= μ x_1 - x_1^3 ⇔ - dot.double(x)_1 &= - μ x_1 + x_1^3
+$
+
+Which indicates that the vector field is symmetric with respect to the $x_2$ axis. Thus, by @perko[Chapter 2.10, Theorem 6], we conclude that the critical point $vv(x^*_0) = (0,0)$ is also a _center_ of the non-linear system.
+
+In order to gauge the stability of the critical point, we employ the stability theory presented in @perko[Chapter 2.9], where Definition 1 defines stability as:
+
+*Definition 1*: Let $vv(ϕ)_t$ denote denote the flow of the differential equation $dot(vv(x)) = vv(f(vv(x)))$ defined for all $t ∈ ℝ$. An equilibrium point $vv(x)_0$ is _stable_ if for all $ε > 0$ there exists a $δ > 0$ such that for all $vv(x) ∈ N_ε (vv(x)_0)$ we have
+$
+  vv(ϕ)_t (vv(x)) ∈ N_ε (vv(x)_0)
+$
+
+The equilibrium point $vv(x)_0$ is _unstable_ if it is not stable. And $vv(x)_0$ is _asymptotically stable_ if it is stable and if there exists a $δ>0$ such that for all $vv(x) ∈ N_δ (vv(x)_0)$ we have
+$
+  lim_(t → ∞) vv(ϕ)_t (vv(x)) = vv(x_0)
+$
+
+We start by constructing a Liapunov function $V(vv(x))$ for the system, which by @perko[Chapter 2.9, Theorem 3]
+must satisfy:
+$
+  V(vv(x_0)) = 0 wider and wider V(vv(x)) > 0 "if" vv(x) ≠ vv(x)_0
+$ <eq:1_liapunov_requirements>
+
+We construct such a function by considering energy conservation of the system and production of the Hamiltonian, $H$, which by definition satisfies:
+$
+  pdv(H, x_2) = dot(x_1) = x_2 wider pdv(H, x_1) = dot(x_2) = -μ x_1 + x_1^3
+$
+Such that:
+$
+  H(x_1, x_2) &= ∫ x_2 dif x_2 = 1/2 x_2^2 + h_1 (x_1)\
+  H(x_1, x_2) &= ∫ -μ x_1 + x_1^3 dif x_1 = - 1/2 μ x_1^2 + 1/4 x_1^4 + h_2 (x_2)\
+$
+
+Allowing the construction of the Hamiltonian, which we let be our Liapunov function:
+$
+  V (vv(x)) = H(x_1, x_2) = 1/2 x_2^2 - 1/2 μ x_1^2 + 1/4 x_1^4 + cancel(c)
+$ <eq:1_hamiltonian>
+
+Which satisfies the necessary conditions for a Liapunov function given in @eq:1_liapunov_requirements by inspection. We consider the temporal derivative of $V (vv(x))$:
+$
+  dot(V) (vv(x)) = 0
+$
+
+Which by @perko[Chapter 2.10, Theorem 3] implies that the critical point is _stable_, but not _asymptotically stable_. This is sometimes referred to as _Liapunov stablility_ or _neutral stability_.
+
+=== Case: $μ > 0$
+
+We then consider the case $μ > 0$, which has three critical points at $vv(x^*_0) = (0,0)$, $vv(x^*_1) = (sqrt(mu), 0)$, and $vv(x^*_2) = (-sqrt(mu), 0)$.
+
+We first compute the Jacobian at $vv(x^*_0) = (0, 0)$ and the eigenvalues of the linearised system:
+$
+  A = D vv(f(vv(x^*_0))) =
+  mat(
+    0, 1;
+    mu, 0
+  )
+$
+
+$
+  p_(x^*_0)(λ) = det(A - λ I) = λ^2 - μ = 0 ⇒ λ_(1,2) = ± sqrt(μ)
+$
+
+Where the eigenvalues are real and of opposite signs, indicating the critical point is a _saddle point_ for the linearised system. Additionally, we note that saddle points are hyperbolic as their eigenvalues are real and non-zero, and that they are _unstable_ by @perko[Chapter 2.9, Theorem 2].
+
+As such, we are able to leverage @perko[Chapter 2.10, Theorem 3] to conclude that the critical point $vv(x^*_0) = (0,0)$ is also a _saddle point_ of the non-linear system.
+
+We may now consider the other two critical points $vv(x^*_(1,2)) = (±sqrt(mu), 0)$, for which we compute the Jacobian and eigenvalues of the linearised system:
+$
+  A = D vv(f(vv(x^*_(1,2)))) =
+  mat(
+    0, 1;
+    μ - 3μ, 0
+  ) =
+  mat(
+    0, 1;
+    -2 μ, 0
+  )
+$
+$
+  p_(x^*_(1,2))(λ) = det(A - λ I) = λ^2 + 2 μ = 0 ⇒ λ_(1,2) = ± i sqrt(2 μ)
+$
+
+By the same logic as in @sec:1b_mu_neg, we find that these are _centers_ of the linearised system.
+
+In order to determine their stability, we consider the case from @sec:1b_mu_neg where we let the origin be translated to the critical point. In this case, we let the constant of integration in @eq:1_hamiltonian be set such that $V (vv(x)_0) = 0$ and follow the remainder of the proof in @sec:1b_mu_neg as before to arrive at the conclusion that these centers are also _Liapunov stable_.
+
+#figure(
+  table(
+    columns: 4,
+    table.header([*$μ$*], [*$vv(x)^*$*], [*Class*], [*Stability*]),
+    $μ < 0$, $(0,0)$, [Center], [Liapunov Stable],
+    $μ > 0$, $(0,0)$, [Saddle], [Unstable],
+    $μ > 0$, $(sqrt(μ),0)$, [Center], [Liapunov Stable],
+    $μ > 0$, $(-sqrt(μ),0)$, [Center], [Liapunov Stable],
+  ),
+  caption: [
+    Classification and stability summary of @sec:1b
+  ]
+)
+
+#line(length: 100%)
+--- Jeppe ↑ -- Yunis ↓
+
+At the critical point $vv(x^*_0) = (0,0)$, we linearise the system by finding the Jacobian:
+$
+  D vv(f(vv(x^*_0))) =
   mat(
     0, 1;
     mu, 0
