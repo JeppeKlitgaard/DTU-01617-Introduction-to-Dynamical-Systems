@@ -178,7 +178,7 @@ $
   dot(V) (vv(x)) = 0
 $
 
-Which by @perko[Chapter 2.10, Theorem 3] implies that the critical point is _stable_, but not _asymptotically stable_. This is sometimes referred to as _Liapunov stablility_ or _neutral stability_.
+Which by @perko[Chapter 2.9, Theorem 3] implies that the critical point is _stable_, but not _asymptotically stable_. This is sometimes referred to as _Liapunov stablility_ or _neutral stability_.
 
 === Case: $μ > 0$
 
@@ -206,6 +206,10 @@ $
   A = D vv(f(vv(x^*_(1,2)))) =
   mat(
     0, 1;
+     μ - 3 x_1^2, 0
+  ) =
+  mat(
+    0, 1;
     μ - 3μ, 0
   ) =
   mat(
@@ -219,7 +223,23 @@ $
 
 By the same logic as in @sec:1b_mu_neg, we find that these are _centers_ of the linearised system.
 
-In order to determine their stability, we consider the case from @sec:1b_mu_neg where we let the origin be translated to the critical point. In this case, we let the constant of integration in @eq:1_hamiltonian be set such that $V (vv(x)_0) = 0$ and follow the remainder of the proof in @sec:1b_mu_neg as before to arrive at the conclusion that these centers are also _Liapunov stable_.
+In order to determine their stability, seek to prove that they are local minimisers by computing the Hessian:
+$
+  D^2 V (vv(x)) = mat(
+    pdv(V, x_1, 2), pdv(V, x_1, x_2);
+    pdv(V, x_2, x_1), pdv(V, x_2, 2)
+  ) =
+  mat(
+    -1μ + 3μ, 0;
+    0, 1
+  ) =
+  mat(
+    2μ, 0;
+    0, 1
+  )
+$
+
+Which is positive definite for $μ > 0$, implying that these critical points are local minimisers of the Liapunov function from @eq:1_hamiltonian. Thus, by @perko[Chapter 2.9, Theorem 3], we conclude that these points are also _Liapunov stable_, but not _asymptotically stable_.
 
 #figure(
   table(
@@ -231,7 +251,7 @@ In order to determine their stability, we consider the case from @sec:1b_mu_neg 
     $μ > 0$, $(-sqrt(μ),0)$, [Center], [Liapunov Stable],
   ),
   caption: [
-    Classification and stability summary of @sec:1b
+    Classification and stability summary  of @sec:1b
   ]
 )
 
