@@ -441,9 +441,11 @@ Note that we can interpret the maximum possible value for $x_1 = sqrt(2 mu)$ as 
   caption: [Plot of the homoclinic orbit $x_2 = h(x_1)$ from @eq:1d_invariance_condition for $mu>0$. The orbit starts and ends at the saddle point at the origin $(0,0)$, forming a closed loop around the other critical points.],
 )<fig:1e>
 
+In @fig:1e we observe that alongside the homoclinic orbital path in the fourth quadrant, the the orbit path in the first quadrant encircles a stable center at $(sqrt(mu), 0)$ with each trajectory within the encircled area corresponding to a different energy level of the system, or equivalently a unique bounded orbit around the center. Each of these trajectories are invariant sets of the system. This aligns with our intuition of a conserved energy system and is consistent with @fig:1c_sketch and @fig:1c_numerical.
 
+We note that all trajectories on the orbit are tangent to to it as expected and required by the invariance condition in @eq:1d_invariance_condition.
 
-- comment on the plot?!
+Lastly, we again note that $h(x_1)$ forms a boundary between different types of motion in the phase space, where trajectories below the epigraph correspond to bounded orbits around the center at $(sqrt(mu), 0)$, while those above it form cycles around both centers.
 
 == Analytical Homoclinic Orbit (4th Quadrant) <sec:1f>
 
@@ -453,8 +455,7 @@ $
   h(x_1)^- = - x_1 sqrt(mu - frac(x_1^2, 2)) quad quad forall x_1 in [0, sqrt(2 mu)]
 $
 
-The resulting graph of $h$ can be seen in @fig:1e in light-green, which is a mirror of the first quadrant homoclinic orbit across the $x_1$-axis. All statements concerning turning points and behaviour apply analogously.
-
+The resulting graph of $h(x_1)$ can be seen in @fig:1e in orange, where it mirrors the first quadrant homoclinic orbit across the $x_1$-axis. All statements concerning turning points and behaviour apply analogously.
 
 #pagebreak()
 = Problem 2 — Bifurcation <sec:2>
@@ -470,6 +471,8 @@ As our analysis in @sec:1 showed, the parameter $mu$ in the Duffing equation fro
   height: 8cm),
   caption: [Bifurcation diagram illustrating the emergence of critical points in the Duffing equation from @eq:1_duffing_original as the bifurcation parameter $mu$ varies.],
 )<fig:2a>
+
+
 
 - comment on the plot?!
 
