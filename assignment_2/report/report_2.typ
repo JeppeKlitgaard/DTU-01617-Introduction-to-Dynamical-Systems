@@ -61,9 +61,6 @@ $ <eq:1_duffing_original>
 
 with $mu∈ℝ$ and $(x_1, x_2) in E = RR^2$. We use the suppressed notation for $x_(1,2)(t): RR^+ arrow RR$ such that $dot(x)_(1,2) = dv(x_(1, 2), t)$, with higher order derivatives being indicated by additional dots.
 
-// TODO: REF
-This is a common form of the Duffing equation, describing a damped and driven oscillator with a non-linear restoring force @ REF.
-
 == Finding critical points <sec:1a>
 
 We wish to find values of $x_1, x_2$ such that $f_1(x_1, x_2) = dot(x)_1 = 0$ and $f_2(x_1, x_2) = dot(x)_2 = 0$. Thus, we find that:
@@ -142,7 +139,7 @@ Which indicates that the vector field is symmetric with respect to the $x_2$ axi
 
 In order to gauge the stability of the critical point, we employ the stability theory presented in @perko[Chapter 2.9], where Definition 1 defines stability as:
 
-*Definition 1*: Let $vv(ϕ)_t$ denote denote the flow of the differential equation $dot(vv(x)) = vv(f(vv(x)))$ defined for all $t ∈ ℝ$. An equilibrium point $vv(x)_0$ is _stable_ if for all $ε > 0$ there exists a $δ > 0$ such that for all $vv(x) ∈ N_δ (vv(x)_0)$ we have
+*Definition 1*: Let $vv(ϕ)_t$ denote the flow of the differential equation $dot(vv(x)) = vv(f(vv(x)))$ defined for all $t ∈ ℝ$. An equilibrium point $vv(x)_0$ is _stable_ if for all $ε > 0$ there exists a $δ > 0$ such that for all $vv(x) ∈ N_ε (vv(x)_0)$ we have
 $
   vv(ϕ)_t (vv(x)) ∈ N_ε (vv(x)_0)
 $
@@ -178,7 +175,7 @@ $
   dot(V) (vv(x)) = 0
 $
 
-Which by @perko[Chapter 2.9, Theorem 3] implies that the critical point is _stable_, but not _asymptotically stable_. This is sometimes referred to as _Liapunov stablility_ or _neutral stability_.
+Which by @perko[Chapter 2.9, Theorem 3] implies that the critical point is _stable_, but not _asymptotically stable_. This is sometimes referred to as _Liapunov stability_ or _neutral stability_.
 
 === Case: $μ > 0$
 
@@ -255,64 +252,64 @@ Which is positive definite for $μ > 0$, implying that these critical points are
   ]
 )
 
-#line(length: 100%)
---- Jeppe ↑ -- Yunis ↓
+// #line(length: 100%)
+// --- Jeppe ↑ -- Yunis ↓
 
-At the critical point $vv(x^*_0) = (0,0)$, we linearise the system by finding the Jacobian:
-$
-  D vv(f(vv(x^*_0))) =
-  mat(
-    0, 1;
-    mu, 0
-  )
-  quad arrow.double quad
-  p_(x^*_0)(λ) =
-  det(
-    mat(
-      λ, -1
-      ; -mu, λ
-    )
-  ) = λ^2 - mu = 0
-  quad arrow.double quad
-  λ_(1,2) = ± sqrt(mu)
-$
+// At the critical point $vv(x^*_0) = (0,0)$, we linearise the system by finding the Jacobian:
+// $
+//   D vv(f(vv(x^*_0))) =
+//   mat(
+//     0, 1;
+//     mu, 0
+//   )
+//   quad arrow.double quad
+//   p_(x^*_0)(λ) =
+//   det(
+//     mat(
+//       λ, -1
+//       ; -mu, λ
+//     )
+//   ) = λ^2 - mu = 0
+//   quad arrow.double quad
+//   λ_(1,2) = ± sqrt(mu)
+// $
 
-As the eigenvalues are depended on the parameter $mu$, we consider two cases. As afore mentioned, excluding the degenerate case $mu=0$, where $λ_(1,2) = 0$ is a algebraic multiplicity of 2, thus a critical case with non-hyperbolic behaviour @ REF, hence initially inconclusive.
+// As the eigenvalues are depended on the parameter $mu$, we consider two cases. As afore mentioned, excluding the degenerate case $mu=0$, where $λ_(1,2) = 0$ is a algebraic multiplicity of 2, thus a critical case with non-hyperbolic behaviour @ REF, hence initially inconclusive.
 
-1. If $mu>0$: eigenvalues are real, opposite signs $lambda_1=+ sqrt(mu), lambda_2=-sqrt(mu)$. That is a *saddle point* with one stable (negative eigenvalue $lambda_2$) and one unstable direction. Saddles are hyperbolic but unstable as trajectories are repelled in one direction and attracted in another.
+// 1. If $mu>0$: eigenvalues are real, opposite signs $lambda_1=+ sqrt(mu), lambda_2=-sqrt(mu)$. That is a *saddle point* with one stable (negative eigenvalue $lambda_2$) and one unstable direction. Saddles are hyperbolic but unstable as trajectories are repelled in one direction and attracted in another.
 
-2. If $mu < 0$: eigenvalues are pure imaginary $lambda = plus.minus i sqrt(|mu|)$. This indicates that the linearization via the Jacobian only gives a _linear center_ (center for the linearization). For conclusions relating back to the non-linear system we need more information.
+// 2. If $mu < 0$: eigenvalues are pure imaginary $lambda = plus.minus i sqrt(|mu|)$. This indicates that the linearization via the Jacobian only gives a _linear center_ (center for the linearization). For conclusions relating back to the non-linear system we need more information.
 
-Purely imaginary eigenvalues indicate _neutral stability_ in the linearized system, meaning that trajectories neither converge nor diverge from the critical point, but rather orbit around it. However, this does not guarantee stability in the non-linear system, as non-linear effects can lead to different behaviours.
+// Purely imaginary eigenvalues indicate _neutral stability_ in the linearized system, meaning that trajectories neither converge nor diverge from the critical point, but rather orbit around it. However, this does not guarantee stability in the non-linear system, as non-linear effects can lead to different behaviours.
 
-At the *critical points $x^*_(1,2) = (plus.minus sqrt(mu), 0)$*, which only exists for $mu > 0$, we find the Jacobian:
+// At the *critical points $x^*_(1,2) = (plus.minus sqrt(mu), 0)$*, which only exists for $mu > 0$, we find the Jacobian:
 
-$
-  D_f(x^*_(1,2)) &=
-  mat(
-    0, 1;
-    mu - 3(mu), 0
-  ) =
-  mat(
-    0, 1;
-    -2 mu, 0
-  ) \
-  &arrow.double quad
-  p_(x^*_(1,2))(λ) =
-  det(
-    mat(
-      λ, -1
-      ; 2 mu, λ
-    )
-  ) = λ^2 + 2 mu = 0 \
-  &arrow.double quad
-  λ_(1,2) = ± i sqrt(2 mu)
-$
+// $
+//   D_f(x^*_(1,2)) &=
+//   mat(
+//     0, 1;
+//     mu - 3(mu), 0
+//   ) =
+//   mat(
+//     0, 1;
+//     -2 mu, 0
+//   ) \
+//   &arrow.double quad
+//   p_(x^*_(1,2))(λ) =
+//   det(
+//     mat(
+//       λ, -1
+//       ; 2 mu, λ
+//     )
+//   ) = λ^2 + 2 mu = 0 \
+//   &arrow.double quad
+//   λ_(1,2) = ± i sqrt(2 mu)
+// $
 
-Again, these eigenvalues are purely imaginary, indicating _neutral stability_ in the linearized system. As before, this does not guarantee stability in the non-linear system, and further analysis would be required to determine the actual stability of these critical points.
+// Again, these eigenvalues are purely imaginary, indicating _neutral stability_ in the linearized system. As before, this does not guarantee stability in the non-linear system, and further analysis would be required to determine the actual stability of these critical points.
 
-Summing up, we can only definitely classify one of the critical points $x^*_0$ in @eq:1a_critical_points as a saddle point (unstable) for $mu > 0$. The other critical points exhibit purely imaginary eigenvalues, indicating _neutral stability_ in the linearized system, but their actual stability in the non-linear system remains inconclusive without further analysis.
-For $mu < 0$, only $x^*_0$ exists and exhibits purely imaginary eigenvalues, again indicating _neutral stability_ in the linearized system, but inconclusive for the non-linear system.
+// Summing up, we can only definitely classify one of the critical points $x^*_0$ in @eq:1a_critical_points as a saddle point (unstable) for $mu > 0$. The other critical points exhibit purely imaginary eigenvalues, indicating _neutral stability_ in the linearized system, but their actual stability in the non-linear system remains inconclusive without further analysis.
+// For $mu < 0$, only $x^*_0$ exists and exhibits purely imaginary eigenvalues, again indicating _neutral stability_ in the linearized system, but inconclusive for the non-linear system.
 
 == Sketching the Phase Portrait & Flow <sec:1c>
 
@@ -335,7 +332,6 @@ We additionally plot the numerically computed phase portraits rendered using Pyt
 == Analytical Homoclinic Orbit (1st Quadrant) <sec:1d>
 
 Before we begin discussions, it helps to formulate a more intuitive definition of _homoclinic orbits_~@perko[Chapter 3.3]. A homoclinic orbit is a trajectory in the phase space of a dynamical system that starts and ends at the same saddle point. In other words, it is a path that leaves a saddle point along its unstable manifold and then returns to the same saddle point along its stable manifold.
-// JK: Not in this case, always, I think. In this case, it does a tour around other critical points in between.
 
 In the phase portrait for $mu > 0$ shown on the right panel of @fig:1c_numerical, we can observe a homoclinic orbit associated with the saddle point $x^*_0$ at the origin $(0,0)$. These orbits leave the saddle point along its unstable manifold and return to it along its stable manifold, forming closed loops around the other critical points $x^*_(1,2)$ at $(plus.minus sqrt(mu), 0)$.
 We note that the purple cycle shown in the right panel of @fig:1c_sketch is determined by the equilibrium point at the origin, which in combination with the homoclinic orbit forms a _separatrix cycle_~@perko[Chapter 3.3]. This cycle separates different types of motion in the phase space, distinguishing between trajectories that remain close to the center points and those that diverge away.
@@ -381,7 +377,11 @@ in this quadrant.
 
 To prove that $h(x_1)$ cannot be one-to-one, we may simply refer to the graph in @fig:1c_numerical and pick a counter example of two points in the first quadrant for which the second coordinate $x_2$ is the same. Alternatively, the derivative of $h(x_1)$ may be investigated to find that both negative and positive slopes exist in the first quadrant, indicating that $h$ is not monotonic and thus not one-to-one.
 
+Alternatively, the assignment may have meant to say that $h(x_1)$ is single-valued in the first quadrant, which is true as we have taken the positive root of the homoclinic orbit function.
+
 Note that we can interpret the maximum possible value for $x_1 = sqrt(2 mu)$ as the turning point of the homoclinic orbit in the first quadrant, after which it returns to the origin along the stable manifold along the orbit on the fourth quadrant ($x_1 > 0, x_2 < 0$). Thus it starts at the origin $h(x_1=0)=0$ and transitions into the fourth quadrant at $h(x_1 = sqrt(2 mu))=0$, see @fig:1c_numerical.
+
+Lastly we note that while the homoclinic orbit is closed, it takes infinite time to traverse it due to the flow slowing down as it approaches the saddle point at the origin. This is a common characteristic of homoclinic orbits in dynamical systems.
 
 // ---
 
@@ -423,7 +423,7 @@ Note that we can interpret the maximum possible value for $x_1 = sqrt(2 mu)$ as 
 // $
 //   h(x_1)^2 &= mu x_1^2 - 1/2 x_1^4 \
 //   h(x_1) &= plus.minus x_1 sqrt(mu - frac(x_1^2, 2)) \
-// $<eq:1d_homoclinic_solution>
+// $ // <eq:1d_homoclinic_solution>
 
 // For the first quadrant, we take the positive root, yielding the homoclinic orbit function:
 
@@ -431,7 +431,7 @@ Note that we can interpret the maximum possible value for $x_1 = sqrt(2 mu)$ as 
 //   h(x_1)^+ = x_1 sqrt(mu - frac(x_1^2, 2)) quad quad forall x_1 in [0, sqrt(2 mu)]
 // $
 
-// Note that we can interpret the maximum possible value for $x_1 = sqrt(2 mu)$ (for the root to ne non-negative) as the turning point of the homoclinic orbit in the first quadrant, after which it returns to the origin along the stable manifold along the orbit on the fourth quadrant ($x_1 >0, x_2 < 0$). Thus it starts at the origin $h(x_1=0)=0$ and transitions into the fourth quadrant at $h(x_1 = sqrt(2 mu))=0$, see @fig:1c_numerical.
+// Note that we can interpret the maximum possible value for $x_1 = sqrt(2 mu)$ (for the root to be non-negative) as the turning point of the homoclinic orbit in the first quadrant, after which it returns to the origin along the stable manifold along the orbit on the fourth quadrant ($x_1 >0, x_2 < 0$). Thus it starts at the origin $h(x_1=0)=0$ and transitions into the fourth quadrant at $h(x_1 = sqrt(2 mu))=0$, see @fig:1c_numerical.
 
 == Plotting the Homoclinic Orbit (1st quadrant) <sec:1e>
 
@@ -441,7 +441,7 @@ Note that we can interpret the maximum possible value for $x_1 = sqrt(2 mu)$ as 
   caption: [Plot of the homoclinic orbit $x_2 = h(x_1)$ from @eq:1d_invariance_condition for $mu>0$. The orbit starts and ends at the saddle point at the origin $(0,0)$, forming a closed loop around the other critical points.],
 )<fig:1e>
 
-In @fig:1e we observe that alongside the homoclinic orbital path in the fourth quadrant, the the orbit path in the first quadrant encircles a stable center at $(sqrt(mu), 0)$ with each trajectory within the encircled area corresponding to a different energy level of the system, or equivalently a unique bounded orbit around the center. Each of these trajectories are invariant sets of the system. This aligns with our intuition of a conserved energy system and is consistent with @fig:1c_sketch and @fig:1c_numerical.
+In @fig:1e we observe that alongside the homoclinic orbital path in the fourth quadrant, the orbit path in the first quadrant encircles a stable center at $(sqrt(mu), 0)$ with each trajectory within the encircled area corresponding to a different energy level of the system, or equivalently a unique bounded orbit around the center. Each of these trajectories are invariant sets of the system. This aligns with our intuition of a conserved energy system and is consistent with @fig:1c_sketch and @fig:1c_numerical.
 
 We note that all trajectories on the orbit are tangent to to it as expected and required by the invariance condition in @eq:1d_invariance_condition.
 
@@ -486,62 +486,71 @@ We observe that the critical point at the origin $(0,0)$ transitions from a stab
 
 == Type of Bifurcation <sec:2b>
 
-The bifurcation observed in @fig:2a from Duffing equation from @eq:1_duffing_original as the parameter $mu$ crosses zero is an architypical example of a *pitchfork bifurcation*~@perko[Chapter 4.2, Figure 6], sometimes referred to as a *supercritical pitchfork bifurcation* in other literature, where supercriticality indicates that as the bifurcation parameter $mu$ passes through a transition value, here $mu=0$, a single center stable critical point at the origin $(0,0)$ for $mu<0$ becomes an unstable saddle point for $mu>0$, and two new stable critical points (at $(plus.minus sqrt(mu), 0)$) emerge symmetrically on either side of the original point.
+The bifurcation observed in @fig:2a from Duffing equation from @eq:1_duffing_original as the parameter $mu$ crosses zero is an archetypical example of a *pitchfork bifurcation*~@perko[Chapter 4.2, Figure 6], sometimes referred to as a *supercritical pitchfork bifurcation* in other literature, where supercriticality indicates that as the bifurcation parameter $mu$ passes through a transition value, here $mu=0$, a single center stable critical point at the origin $(0,0)$ for $mu<0$ becomes an unstable saddle point for $mu>0$, and two new stable critical points (at $(plus.minus sqrt(mu), 0)$) emerge symmetrically on either side of the original point.
 
 == Hyperbolicity for bifurcation transition $mu=0$ <sec:2c>
-At $mu=0$ all eigenvalues of the Jacobian at the critical point
-
+We determine the hyperbolicity of the system at $mu=0$ by computing the Jacobian:
 $
-  x^*_0 arrow D_f(x^*_0) = D_f(0,0) = mat(0, 1; 0, 0)
+  D f(x^*_0) = D f(0,0) = mat(0, 1; -3x_1^2, 0) = mat(0, 1; 0, 0)
 $
 
-are zero, i.e. $lambda_(1,2) = 0$, it has algebraic multiplicity of two at $0$. This indicates that the critical point is non-hyperbolic at the bifurcation point $mu=0$. Hence, the linearization theorem that requires hyperbolicity does not apply here, and we cannot draw conclusions about the stability of the critical point based solely on the linearized system.
+Of which we may determine the eigenvalues by solving the characteristic polynomial:
+$
+  p_(x^*_0)(λ) = det(D f(x^*_0) - λ I) = λ^2 = 0 ⇒ λ_(1,2) = 0
+$
+
+Clearly, this is non-hyperbolic, as hyperbolicity requires that all eigenvalues have non-zero real parts.
+
+It follows that the critical point is non-hyperbolic at the bifurcation point $mu=0$. Hence, the Hartman-Grobman Theorem~@perko[Chapter 2.8] does not apply here, and we cannot draw conclusions about the stability of the critical point based solely on the linearized system.
 
 == Lyapunov Stability for non-hyperbolic case <sec:2d>
-As we determined in @sec:2c, the critical point $x^*_0$ at the bifurcation point $mu=0$ is non-hyperbolic and we cannot conclude stability from the linearized system alone. Hence, we can use a Lyapunov function to analyse the stability of this critical point. A very common first guess is the simple quadratic form $V(x_1, x_2) = x_1^2 + x_2^2$. Another common choice is the energy function; in this case a natural candidate, since the system can be interpreted as a mechanical oscillator.
+As we determined in @sec:2c, the critical point $x^*_0$ at the bifurcation point $mu=0$ is non-hyperbolic and we cannot conclude stability from the linearized system alone. Hence, we can again apply the theorems of @perko[Chapter 2.10] as done for the non-hyperbolic cases in @sec:1b.
 
+We recall the chosen Liapunov function from @eq:1_hamiltonian:
 $
-  V(x_1, x_2) = frac(1,2) x_2^2 + frac(1,4) x_1^4
-$<eq:2d_lyapunov_function>
+  V (x_1, x_2) = 1/2 x_2^2 -  cancel(1/2 mu x_1^2) + 1/4 x_1^4
+$ <eq:2d_lyapunov_function>
 
-The Lyapunov function needs to be positive definite, i.e. $V(x_1, x_2) > 0$ for all $(x_1, x_2) ≠ (0,0)$ and $V(0,0) = 0$. This is satisfied for @eq:2d_lyapunov_function, as both terms are squares and thus non-negative, and the only point where $V$ is zero is at the origin.
+//  a Lyapunov function to analyse the stability of this critical point. A very common first guess is the simple quadratic form $V(x_1, x_2) = x_1^2 + x_2^2$. Another common choice is the energy function; in this case a natural candidate, since the system can be interpreted as a mechanical oscillator.
+
+// $
+//   V(x_1, x_2) = frac(1,2) x_2^2 + frac(1,4) x_1^4
+// $<eq:2d_lyapunov_function>
+
+// The Lyapunov function needs to be positive definite, i.e. $V(x_1, x_2) > 0$ for all $(x_1, x_2) ≠ (0,0)$ and $V(0,0) = 0$. This is satisfied for @eq:2d_lyapunov_function, as both terms are squares and thus non-negative, and the only point where $V$ is zero is at the origin.
 
 Next, we compute the time derivative of $V$ along the trajectories / solutions $x_1(t), x_2(t)$ of the system $bold(f)$ for $mu=0$:
 
 $
   dot(V)(x_1(t), x_2(t)) &= nabla_t V(x_1(t), x_2(t)) (dot(x)_1(t), dot(x)_2(t)) quad quad "via chain rule"\
-  &= partial V_(x_1) dot(x)_1 + partial V_(x_2) dot(x)_2
+  &= pdv(V, x_1) dot(x)_1 + pdv(V, x_2) dot(x)_2
   quad quad quad quad quad quad quad quad
   "inserting into function"\
   &= x_1^3 dot(x)_1 + x_2 dot(x)_2 \
   &= x_1^3 x_2 + x_2 (mu - x_1^3) \
   &= x_1^3 x_2 + x_2 (- x_1^3) \
-  &equiv 0
+  &= 0
 $
 
-Since $V$ is positive definite and $dot(V)≡0$, we can interpret that the energy in the system stays constant along each trajectory. That means, trajectories are contained within their (energy-)level-set of the Lyapunov function.
-Thus, the origin $(x_1, x_2) = (0,0)$ at $mu=0$ is Lyapunov (stable): small initial conditions remain small for all time.
-However, because $dot(V)$ is identically zero (not negative definite), one cannot conclude asymptotic stability. In fact, the origin is not asymptotically stable (solutions near origin are periodic orbits—center behavior, similar to the linear centers $x^*_(1,2)$ with purely imaginary Eigenvalues in the linearized system).
+Since the requirements of @perko[Chapter 2.9, Theorem 3] given in @eq:1_liapunov_requirements are satisfied,
+we may again leverage this theorem alongside the conclusion that $dot(V) = 0$ to determine the stability of the critical point at the origin for $mu=0$ as _stable_ or _Lyapunov stable_, but not _asymptotically stable_, which would require $dot(V) < 0$.
 
-So, the origin is a stable center (Lyapunov stable) but not asymptotically stable.
-
+As such, the origin is a stable center (Lyapunov stable), but not asymptotically stable.
 
 == Contour Plot of Lyapunov Function <sec:2e>
 
 #figure(
   image("../img/2_e_contourV_phase.png",
   height: 8cm),
-  caption: [Contour plot of the Lyapunov function $V(x_1, x_2)$ from @eq:2d_lyapunov_function for $mu=0$. The contours represent level sets of constant energy in the system. Overlay over the phase plot with vector field arrows.],
+  caption: [Contour plot of the Lyapunov function $V(x_1, x_2)$ from @eq:2d_lyapunov_function for $mu=0$. The contours represent level sets of constant energy in the system. The plot is overlaid with vector field arrows.],
 )<fig:2e>
 
-As clearly visible in @fig:2e, the contours of the Lyapunov function $V(x_1, x_2)$ from @eq:2d_lyapunov_function represent not only level sets of constant energy but also trajectories as solutions of the system @eq:1_duffing_original for $mu=0$. This is consistent with our earlier analysis in @sec:2d, where we found that the time derivative of the Lyapunov function $dot(V)$ is identically zero along trajectories, indicating that energy remains constant.
+As clearly visible in @fig:2e, the contours of the Lyapunov function $V(x_1, x_2)$ from @eq:2d_lyapunov_function represent not only level sets of constant energy but also trajectories as solutions of the system @eq:1_duffing_original for $mu=0$. This is consistent with our earlier analysis in @sec:2d, where we found that the time derivative of the Lyapunov function $dot(V)$ is identically zero along trajectories, indicating that energy is conserved.
 
-*REVIEW*
 Further we observe, that the level sets along with trajectories of the vector field form elliptical closed orbits around the origin. The elliptical shape could be attributed to the stretch of the system along the $x_1$-axis, due to the quartic term in $V$ (@eq:2d_lyapunov_function), compared to only the quadratic term for $x_2$.
 
-
 == Stability for $(0,0)$ at $mu=0$<sec:2f>
-The required Theorem from @perko[Chapther 2.11, p.151, Theorem 2] states:
+The required theorem from @perko[Chapter 2.11, p.151, Theorem 2] states:
 
 For when matrix $A$ of a linearized system has two zero eigenvalues, i.e. $det(A) = tr(A) = 0$, but $A≠0$, the system can be put into a 'normal' form:
 
@@ -552,16 +561,22 @@ $<eq:2f_perko_normal_form>
 
 where $h(x), g(x), R(x,y)$ are analytic in the neighborhood of the origin with $h(0) = g(0) = 0$ and $k ≥ 2, n ≥ 1$.
 
-#quote(attribution: [Perko])[
-  *Theorem 2* \
-  Let $k= 2m+1$ with $m ≥1$ in @eq:2f_perko_normal_form and let $lambda = b_n^2 + 4(m+1) a_k$. Then if $a_k > 0$, the origin is a topological saddle. If $a_k < 0$, the origin is \
-  (1) a focus or a center if $b_n=0$ and also if $b_n≠0$ and $n>m$ or if $n=m$ and $lambda < 0$, \
-  (2) a node if $b_n ≠ 0$, $n$ is an even number and $n < m$ and also if $b_n ≠ 0$, $n$ is an even number, $n =m$ and $lambda ≥0$ and \
-  (3) a critical point with an elliptic domain if $b_n ≠ 0$, $n$ is an odd number and $n < m$ and also if $b_n ≠ 0$, $n$ is an odd number, $n =m$ and $lambda ≥ 0$.
-]
+=== Perko Theorem @perko[Chapter 2.11, P. 151, Theorem 2]
 
-From this theorem, we can conclude that our system @eq:1_duffing_original at the critical point $(0,0)$ for $mu=0$ can be transformed into the normal form @eq:2f_perko_normal_form with: $k=3, a_k=-1, b_n=0, h(x)=0, R(x,y)=0$
+Let $k= 2m+1$ with $m ≥1$ in @eq:2f_perko_normal_form and let $lambda = b_n^2 + 4(m+1) a_k$. Then if $a_k > 0$, the origin is a topological saddle. If $a_k < 0$, the origin is \
+(1) a focus or a center if $b_n=0$ and also if $b_n≠0$ and $n>m$ or if $n=m$ and $lambda < 0$, \
+(2) a node if $b_n ≠ 0$, $n$ is an even number and $n < m$ and also if $b_n ≠ 0$, $n$ is an even number, $n =m$ and $lambda ≥0$ and \
+(3) a critical point with an elliptic domain if $b_n ≠ 0$, $n$ is an odd number and $n < m$ and also if $b_n ≠ 0$, $n$ is an odd number, $n =m$ and $lambda ≥ 0$.
 
-Thus, we have a focus or a center according to case (1) in the theorem, which is consistent with our earlier findings in @sec:2d using the Lyapunov function, where we concluded that the origin is a stable center (Lyapunov stable) but not asymptotically stable.
+From this theorem, we can conclude that our system @eq:1_duffing_original at the critical point $(0,0)$ for $mu=0$ can be transformed into the normal form @eq:2f_perko_normal_form with:
+$
+k &= 3\
+a_k &= -1\
+b_n &= 0\
+h(x) &= 0\
+R(x, y) &= 0\
+$
+
+Thus, we have a focus or a center according to case (1) in the theorem, which is consistent with our earlier findings in @sec:2d using the Lyapunov function, where we concluded that the origin is a stable center (Lyapunov stable) but not asymptotically stable. The theorem is notably _not_ able to distinguish between a focus and a center in this case.
 
 #bibliography("refs.bib")
