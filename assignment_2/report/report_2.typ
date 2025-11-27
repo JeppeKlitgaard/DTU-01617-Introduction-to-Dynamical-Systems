@@ -460,25 +460,33 @@ The resulting graph of $h(x_1)$ can be seen in @fig:1e in orange, where it mirro
 #pagebreak()
 = Problem 2 — Bifurcation <sec:2>
 
-== Bifurcation parameter & diagram <sec:2a>
-
 A bifurcation parameter is a parameter in a dynamical system that, when varied, causes a change in the system's behavior or structure. Bifurcations often lead to the emergence or disappearance of critical points, periodic orbits, or changes in stability at those points.
+
+== Bifurcation parameter & diagram <sec:2a>
 
 As our analysis in @sec:1 showed, the parameter $mu$ in the Duffing equation from @eq:1_duffing_original acts as a bifurcation parameter. Specifically, we observed an emergence of two additional critical points $x^*_(1,2)$ at $(plus.minus sqrt(mu), 0)$ when $mu$ transitions from negative to positive values. This indicates a bifurcation occurring at the critical value $mu=0$.
 
+With this, we are able to sketch a bifurcation diagram illustrating how the critical points of the system change as the bifurcation parameter $mu$ varies as shown in @fig:2a_sketch.
+
 #figure(
-  image("../img/2_a_bifurcation_param_diagram.png",
+  image("../img/2_a_sketch.jpg",
+  height: 6cm),
+  caption: [Sketch of the bifurcation diagram illustrating the emergence of critical points in the Duffing equation from @eq:1_duffing_original as the bifurcation parameter $mu$ varies. Blue lines indicate centers, whereas the purple line indicates a saddle point.],
+) <fig:2a_sketch>
+
+Additionally, we plot the numerically computed bifurcation diagram rendered using Python's `matplotlib` library as shown in @fig:2a, which confirms our qualitative sketch from @fig:2a_sketch.
+
+#figure(
+  image("../img/2_a_numerical.png",
   height: 8cm),
   caption: [Bifurcation diagram illustrating the emergence of critical points in the Duffing equation from @eq:1_duffing_original as the bifurcation parameter $mu$ varies.],
 )<fig:2a>
 
-
-
-- comment on the plot?!
+We observe that the critical point at the origin $(0,0)$ transitions from a stable center (blue line) for $mu < 0$ to an unstable saddle point (purple line) for $mu > 0$. Simultaneously, two new stable centers (blue lines) emerge symmetrically at $(plus.minus sqrt(mu), 0)$ for $mu > 0$. This bifurcation behavior is characteristic of a pitchfork bifurcation.
 
 == Type of Bifurcation <sec:2b>
-The bifurcation observed in @fig:2a from Duffing equation from @eq:1_duffing_original as the parameter $mu$ crosses zero is the prototype of a *supercritical pitchfork bifurcation* (@ REF).
-In this supercritical pitchfork bifurcation, as the bifurcation parameter $mu$ passes through a transition value (here, $mu=0$), a single center stable critical point at the origin $(0,0)$ for $mu<0$ becomes an unstable saddle point for $mu>0$, and two new stable critical points (at $(plus.minus sqrt(mu), 0)$) emerge symmetrically on either side of the original point.
+
+The bifurcation observed in @fig:2a from Duffing equation from @eq:1_duffing_original as the parameter $mu$ crosses zero is an architypical example of a *pitchfork bifurcation*~@perko[Chapter 4.2, Figure 6], sometimes referred to as a *supercritical pitchfork bifurcation* in other literature, where supercriticality indicates that as the bifurcation parameter $mu$ passes through a transition value, here $mu=0$, a single center stable critical point at the origin $(0,0)$ for $mu<0$ becomes an unstable saddle point for $mu>0$, and two new stable critical points (at $(plus.minus sqrt(mu), 0)$) emerge symmetrically on either side of the original point.
 
 == Hyperbolicity for bifurcation transition $mu=0$ <sec:2c>
 At $mu=0$ all eigenvalues of the Jacobian at the critical point
