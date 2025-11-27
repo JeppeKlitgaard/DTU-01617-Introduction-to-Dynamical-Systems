@@ -351,7 +351,7 @@ The homoclinic orbit shown in purple can be observed encircling the stable centr
 Before we begin discussions, it helps to formulate a more intuitive definition of _homoclinic orbits_ (@ REF). A homoclinic orbit is a trajectory in the phase space of a dynamical system that starts and ends at the same saddle point. In other words, it is a path that leaves a saddle point along its unstable manifold and then returns to the same saddle point along its stable manifold.
 In this case, it does a tour around other critical points in between.
 
-In the phase portrait for $mu > 0$ (left figure in @fig:1c), we can observe homoclinic orbits associated with the saddle point $x^*_0$ at the origin $(0,0)$. These orbits leave the saddle point along its unstable manifold and return to it along its stable manifold, forming closed loops around the other critical points $x^*_(1,2)$ at $(plus.minus sqrt(mu), 0)$.
+In the phase portrait for $mu > 0$ (left figure in @fig:1c_numerical), we can observe homoclinic orbits associated with the saddle point $x^*_0$ at the origin $(0,0)$. These orbits leave the saddle point along its unstable manifold and return to it along its stable manifold, forming closed loops around the other critical points $x^*_(1,2)$ at $(plus.minus sqrt(mu), 0)$.
 
 Now we can determine a homeomorphic function $h in C^1$, that can identify / trace these homoclinic orbits in the phase space. It is important to look at the function by each quadrant of the phase plane to prevserve injectivity. This functiion $h: RR arrow RR$ will describe a graph in the phase plane, i.e. $x_2 = h(x_1)$.
 
