@@ -316,8 +316,17 @@ For $mu < 0$, only $x^*_0$ exists and exhibits purely imaginary eigenvalues, aga
 
 == Sketching the Phase Portrait & Flow <sec:1c>
 
-\
-*Clarify: Sketch flow 'in' the phase portrait? Meaning plotting trajectories of the solution in the phase portrait?*
+Using the results from @sec:1b, we can sketch the phase portraits for both cases $μ > 0$ and $μ < 0$ as seen in @fig:1c_sketch.
+
+The homoclinic orbit shown in purple can be observed encircling the stable centres at $(±sqrt(μ), 0)$ and crossing at the saddle point in $(0, 0)$.
+
+// TODO: segue
+
+#figure(
+  image("../img/1_c_sketch.jpg", height: 7cm),
+  caption: [Sketch of the phase plane of vector field $vv(f)$ from @eq:1_duffing_original for $μ > 0$ (left) and $μ < 0$ (right).],
+)<fig:1c_sketch>
+
 
 #figure(
   grid(
@@ -333,12 +342,10 @@ For $mu < 0$, only $x^*_0$ exists and exhibits purely imaginary eigenvalues, aga
     )
   ),
   caption: [Sketch of the phase plane of vectorfield $bold(f)$ from @eq:1_duffing_original for $mu > 0$ (left) and $mu < 0$ (right). Critical points are marked in red (saddles) and blue (centers). Arrows indicate the flow of the system.],
-)<fig:1c>
+)<fig:1c_numerical>
 
-- insert hand-drawn sketches here
-- comment on the plot?!
+// TODO: These are not linear centers, they are just centers. Ideally we would have some trajectories in there and maybe fewer arrows in the quiver plot? Also would be nice if the sides were swapped since I did the sketch the other way around without thinking.
 
-\
 == Analytical Homoclinic Orbit (1st Quadrant) <sec:1d>
 
 Before we begin discussions, it helps to formulate a more intuitive definition of _homoclinic orbits_ (@ REF). A homoclinic orbit is a trajectory in the phase space of a dynamical system that starts and ends at the same saddle point. In other words, it is a path that leaves a saddle point along its unstable manifold and then returns to the same saddle point along its stable manifold.
