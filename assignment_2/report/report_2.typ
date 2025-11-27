@@ -142,7 +142,7 @@ Which indicates that the vector field is symmetric with respect to the $x_2$ axi
 
 In order to gauge the stability of the critical point, we employ the stability theory presented in @perko[Chapter 2.9], where Definition 1 defines stability as:
 
-*Definition 1*: Let $vv(ϕ)_t$ denote denote the flow of the differential equation $dot(vv(x)) = vv(f(vv(x)))$ defined for all $t ∈ ℝ$. An equilibrium point $vv(x)_0$ is _stable_ if for all $ε > 0$ there exists a $δ > 0$ such that for all $vv(x) ∈ N_ε (vv(x)_0)$ we have
+*Definition 1*: Let $vv(ϕ)_t$ denote denote the flow of the differential equation $dot(vv(x)) = vv(f(vv(x)))$ defined for all $t ∈ ℝ$. An equilibrium point $vv(x)_0$ is _stable_ if for all $ε > 0$ there exists a $δ > 0$ such that for all $vv(x) ∈ N_δ (vv(x)_0)$ we have
 $
   vv(ϕ)_t (vv(x)) ∈ N_ε (vv(x)_0)
 $
@@ -386,7 +386,7 @@ Note that we can interpret the maximum possible value for $x_1 = sqrt(2 mu)$ as 
 // ---
 
 
-// And as $x_1$ for all $x^*_(0,1,2)$, we plug in $h(0)^2 = 2C = 0$ from @eq:1d_homoclinic_solution_integral to solve for $C=0$. Therefore:
+// And as $x_1=0$ for all $x^*_(0,1,2)$, we plug in $h(0)^2 = 2C = 0$ from @eq:1d_homoclinic_solution_integral to solve for $C=0$. Therefore:
 
 // To derive a first order differential equation for the solution of the graph $x_2 = h(x_1)$, along that graph curve, it must satisfy:
 
