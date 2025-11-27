@@ -139,7 +139,7 @@ Which indicates that the vector field is symmetric with respect to the $x_2$ axi
 
 In order to gauge the stability of the critical point, we employ the stability theory presented in @perko[Chapter 2.9], where Definition 1 defines stability as:
 
-*Definition 1*: Let $vv(ϕ)_t$ denote denote the flow of the differential equation $dot(vv(x)) = vv(f(vv(x)))$ defined for all $t ∈ ℝ$. An equilibrium point $vv(x)_0$ is _stable_ if for all $ε > 0$ there exists a $δ > 0$ such that for all $vv(x) ∈ N_ε (vv(x)_0)$ we have
+*Definition 1*: Let $vv(ϕ)_t$ denote the flow of the differential equation $dot(vv(x)) = vv(f(vv(x)))$ defined for all $t ∈ ℝ$. An equilibrium point $vv(x)_0$ is _stable_ if for all $ε > 0$ there exists a $δ > 0$ such that for all $vv(x) ∈ N_ε (vv(x)_0)$ we have
 $
   vv(ϕ)_t (vv(x)) ∈ N_ε (vv(x)_0)
 $
@@ -441,7 +441,7 @@ Lastly we note that while the homoclinic orbit is closed, it takes infinite time
   caption: [Plot of the homoclinic orbit $x_2 = h(x_1)$ from @eq:1d_invariance_condition for $mu>0$. The orbit starts and ends at the saddle point at the origin $(0,0)$, forming a closed loop around the other critical points.],
 )<fig:1e>
 
-In @fig:1e we observe that alongside the homoclinic orbital path in the fourth quadrant, the the orbit path in the first quadrant encircles a stable center at $(sqrt(mu), 0)$ with each trajectory within the encircled area corresponding to a different energy level of the system, or equivalently a unique bounded orbit around the center. Each of these trajectories are invariant sets of the system. This aligns with our intuition of a conserved energy system and is consistent with @fig:1c_sketch and @fig:1c_numerical.
+In @fig:1e we observe that alongside the homoclinic orbital path in the fourth quadrant, the orbit path in the first quadrant encircles a stable center at $(sqrt(mu), 0)$ with each trajectory within the encircled area corresponding to a different energy level of the system, or equivalently a unique bounded orbit around the center. Each of these trajectories are invariant sets of the system. This aligns with our intuition of a conserved energy system and is consistent with @fig:1c_sketch and @fig:1c_numerical.
 
 We note that all trajectories on the orbit are tangent to to it as expected and required by the invariance condition in @eq:1d_invariance_condition.
 
