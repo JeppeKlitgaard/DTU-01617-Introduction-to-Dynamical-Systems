@@ -320,93 +320,128 @@ Using the results from @sec:1b, we can sketch the phase portraits for both cases
 
 The homoclinic orbit shown in purple can be observed encircling the stable centres at $(±sqrt(μ), 0)$ and crossing at the saddle point in $(0, 0)$.
 
-// TODO: segue
-
 #figure(
-  image("../img/1_c_sketch.jpg", height: 7cm),
+  image("../img/1_c_sketch.jpg", height: 6cm),
   caption: [Sketch of the phase plane of vector field $vv(f)$ from @eq:1_duffing_original for $μ > 0$ (left) and $μ < 0$ (right).],
 )<fig:1c_sketch>
 
+We additionally plot the numerically computed phase portraits rendered using Python's `matplotlib` library as shown in @fig:1c_numerical, which confirms our qualitative sketches from @fig:1c_sketch.
 
 #figure(
-  grid(
-    columns: 2,
-    gutter: 1em,
-    grid.cell(
-      image("../img/1_c_mu_gt_1.png",
-      height: 7cm)
-    ),
-    grid.cell(
-      image("../img/1_c_mu_lt_1.png",
-      height: 7cm)
-    )
-  ),
-  caption: [Sketch of the phase plane of vectorfield $bold(f)$ from @eq:1_duffing_original for $mu > 0$ (left) and $mu < 0$ (right). Critical points are marked in red (saddles) and blue (centers). Arrows indicate the flow of the system.],
+  image("../img/1_c_numerical.png"),
+  caption: [Sketch of the phase portrait of vector field $vv(f)$ from @eq:1_duffing_original for $mu > 0$ (left) and $mu < 0$ (right). Critical points are marked in red (saddles) and blue (centers). Arrows indicate the flow of the system.],
 )<fig:1c_numerical>
-
-// TODO: These are not linear centers, they are just centers. Ideally we would have some trajectories in there and maybe fewer arrows in the quiver plot? Also would be nice if the sides were swapped since I did the sketch the other way around without thinking.
 
 == Analytical Homoclinic Orbit (1st Quadrant) <sec:1d>
 
-Before we begin discussions, it helps to formulate a more intuitive definition of _homoclinic orbits_ (@ REF). A homoclinic orbit is a trajectory in the phase space of a dynamical system that starts and ends at the same saddle point. In other words, it is a path that leaves a saddle point along its unstable manifold and then returns to the same saddle point along its stable manifold.
-In this case, it does a tour around other critical points in between.
+Before we begin discussions, it helps to formulate a more intuitive definition of _homoclinic orbits_~@perko[Chapter 3.3]. A homoclinic orbit is a trajectory in the phase space of a dynamical system that starts and ends at the same saddle point. In other words, it is a path that leaves a saddle point along its unstable manifold and then returns to the same saddle point along its stable manifold.
+// JK: Not in this case, always, I think. In this case, it does a tour around other critical points in between.
 
-In the phase portrait for $mu > 0$ (left figure in @fig:1c_numerical), we can observe homoclinic orbits associated with the saddle point $x^*_0$ at the origin $(0,0)$. These orbits leave the saddle point along its unstable manifold and return to it along its stable manifold, forming closed loops around the other critical points $x^*_(1,2)$ at $(plus.minus sqrt(mu), 0)$.
+In the phase portrait for $mu > 0$ shown on the right panel of @fig:1c_numerical, we can observe a homoclinic orbit associated with the saddle point $x^*_0$ at the origin $(0,0)$. These orbits leave the saddle point along its unstable manifold and return to it along its stable manifold, forming closed loops around the other critical points $x^*_(1,2)$ at $(plus.minus sqrt(mu), 0)$.
+We note that the purple cycle shown in the right panel of @fig:1c_sketch is determined by the equilibrium point at the origin, which in combination with the homoclinic orbit forms a _separatrix cycle_~@perko[Chapter 3.3]. This cycle separates different types of motion in the phase space, distinguishing between trajectories that remain close to the center points and those that diverge away.
 
-Now we can determine a homeomorphic function $h in C^1$, that can identify / trace these homoclinic orbits in the phase space. It is important to look at the function by each quadrant of the phase plane to prevserve injectivity. This functiion $h: RR arrow RR$ will describe a graph in the phase plane, i.e. $x_2 = h(x_1)$.
-
-To derive a first order differential equation for the solution of the graph $x_2 = h(x_1)$, along that graph curve, it must satisfy:
-
+Now we can determine a function $h in C^1$, that prescribes these homoclinic orbits in the phase space, where notably the treatment of $h$ may require piecewise definitions to avoid construction of a many-valued function. This function $h: RR arrow RR$ will describe a graph in the phase plane according to
 $
-  frac(d x_2, d x_1) = frac(dot(x)_2, dot(x)_1) = frac(f_2(x_1, x_2), f_1(x_1, x_2)) = frac(mu x_1 - x_1^3, x_2) = frac(mu x_1 - x_1^3, h(x_1)) = frac(d h, d x_1)
-$<eq:1d_homoclinic_graph_condition>
-
-Hence, we can derive the first order ODE for $h(x_1)$:
-
-$
-  frac(d h, d x_1) = dot(h)(x_1) = (mu x_1 - x_1^3) / h(x_1)
-$<eq:1d_homoclinic_ode>
-
-This is homoclinic at the origin, as $h(0) = 0$ and the first quadrant satisfies $h(x_1) > 0$ for $x_1 > 0$.
-
-@eq:1d_homoclinic_ode is a separable first order ODE for $h(x_1)$, which we can solve by separating variables (multiplying LHS by $h(x_1)$ and RHS by $d x_1$ respectively) and integrating both sides:
-
-$
-  frac(d h, d x_1) &= (mu x_1 - x_1^3) / h(x_1) \
-  arrow.l.r.double quad quad quad quad
-  h(x_1) d h &= (mu x_1 - x_1^3) d x_1 \
-  arrow.l.r.double quad quad quad
-  ∫ h(x_1) d h &= ∫ (mu x_1 - x_1^3) d x_1 \
-  arrow.l.r.double quad quad quad quad
-  1/2 h(x_1)^2 &= 1/2 mu x_1^2 - 1/4 x_1^4 + C \
-  arrow.l.r.double quad quad quad quad
-  h(x_1)^2 &= mu x_1^2 - 1/2 x_1^4 + 2C
-$<eq:1d_homoclinic_solution_integral>
-
-Where $C in RR$ is the integration constant.
-
-Since we already established that the homoclinic orbit passes through the origin, we know that $h(0)=0$. And as $x_1$ for all $x^*_(0,1,2)$, we plug in $h(0)^2 = 2C = 0$ from @eq:1d_homoclinic_solution_integral to solve for $C=0$. Therefore:
-
-$
-  h(x_1)^2 &= mu x_1^2 - 1/2 x_1^4 \
-  h(x_1) &= plus.minus x_1 sqrt(mu - frac(x_1^2, 2)) \
-$<eq:1d_homoclinic_solution>
-
-For the first quadrant, we take the positive root, yielding the homoclinic orbit function:
-
-$
-  h(x_1)^+ = x_1 sqrt(mu - frac(x_1^2, 2)) quad quad forall x_1 in [0, sqrt(2 mu)]
+x_2 = h(x_1)
 $
 
-Note that we can interpret the maximum possible value for $x_1 = sqrt(2 mu)$ (for the root to ne non-negative) as the turning point of the homoclinic orbit in the first quadrant, after which it returns to the origin along the stable manifold along the orbit on the fourth quadrant ($x_1 >0, x_2 < 0$). Thus it starts at the origin $h(x_1=0)=0$ and transitions into the fourth quadrant at $h(x_1 = sqrt(2 mu))=0$, see @fig:1c.
+We require that a solution trajectory lying on the curve formed by $h(x_1)$ must remain on that curve for all time $t$, which requires that the derivatives of $h(x_1)$ and $x_2$ are equal along that curve, yielding the following ordinary differential equation involving $h$:
+$
+  dot(x)_2 = dv(h(x_1), t) = dv(h, x_1) dot(x)_1
+  ⇔
+  dv(h, x_1) = dot(x)_2 / dot(x)_1 = (μ x_1 - x_1^3) / x_2
+$ <eq:1d_invariance_condition>
+
+Which we may solve by separation of variables:
+$
+  dv(h, x_1) &= (μ x_1 - x_1^3) / h(x_1)\
+  &⇕\
+  h(x_1) dif h &= (μ x_1 - x_1^3) dif x_1\
+  &⇕\
+  h(x_1)^2 &= μ x_1^2 - 1/2 x_1^4 + C^2\
+  &⇕\
+  h(x_1) &= cancel(±)sqrt(μ x_1^2 - 1/2 x_1^4 + C^2)\
+$
+
+Where $C in RR$ is the integration constant and the negative root is discarded on the grounds that $x_2 > 0$ if we restrict ourselves to the first quadrant of the phase plane.
+
+Since we require that the homoclinic orbit passes through the origin, we impose $h(0) = 0 = sqrt(0+0+C^2) = 0$, thus yielding the particular solution:
+$
+h(x_1) = x_1 sqrt(μ - 1/2 x_1^2) wider x_1 in [0, sqrt(2 μ)]
+$ <eq:1d_homoclinic_solution>
+
+Where we have found the domain of $h$ by requiring that the radicand is non-negative to obtain the interval:
+$
+μ - 1/2 x_1^2 ≥ 0 ⇔ x_1^2 ≤ 2 μ ⇔ x_1 in [0, sqrt(2 μ)]
+$
+
+Regarding the map $h(x_1)$ when considered only in the first quadrant of the phase plane, ($x_1 > 0, x_2 > 0$), we note that $h$ is _not_ a one-to-one mapping between $x_1$ and $x_2$, though it is non-negative in this quadrant and as such the we find $0 < x_2 = dot(x)_1$, which implies that the position along $x_1$ is monotonically increasing with time $t$, which could be what the question hints at.
+As such, we conclude that both $x_1$ and $(x_1, x_2)$ are one-to-one mappings with respect to time $t$
+in this quadrant.
+
+To prove that $h(x_1)$ cannot be one-to-one, we may simply refer to the graph in @fig:1c_numerical and pick a counter example of two points in the first quadrant for which the second coordinate $x_2$ is the same. Alternatively, the derivative of $h(x_1)$ may be investigated to find that both negative and positive slopes exist in the first quadrant, indicating that $h$ is not monotonic and thus not one-to-one.
+
+Note that we can interpret the maximum possible value for $x_1 = sqrt(2 mu)$ as the turning point of the homoclinic orbit in the first quadrant, after which it returns to the origin along the stable manifold along the orbit on the fourth quadrant ($x_1 > 0, x_2 < 0$). Thus it starts at the origin $h(x_1=0)=0$ and transitions into the fourth quadrant at $h(x_1 = sqrt(2 mu))=0$, see @fig:1c_numerical.
+
+// ---
+
+
+// And as $x_1$ for all $x^*_(0,1,2)$, we plug in $h(0)^2 = 2C = 0$ from @eq:1d_homoclinic_solution_integral to solve for $C=0$. Therefore:
+
+// To derive a first order differential equation for the solution of the graph $x_2 = h(x_1)$, along that graph curve, it must satisfy:
+
+// $
+//   frac(d x_2, d x_1) = frac(dot(x)_2, dot(x)_1) = frac(f_2(x_1, x_2), f_1(x_1, x_2)) = frac(mu x_1 - x_1^3, x_2) = frac(mu x_1 - x_1^3, h(x_1)) = frac(d h, d x_1)
+// $<eq:1d_homoclinic_graph_condition>
+
+// Hence, we can derive the first order ODE for $h(x_1)$:
+
+// $
+//   frac(d h, d x_1) = dot(h)(x_1) = (mu x_1 - x_1^3) / h(x_1)
+// $<eq:1d_homoclinic_ode>
+
+// This is homoclinic at the origin, as $h(0) = 0$ and the first quadrant satisfies $h(x_1) > 0$ for $x_1 > 0$.
+
+// @eq:1d_homoclinic_ode is a separable first order ODE for $h(x_1)$, which we can solve by separating variables (multiplying LHS by $h(x_1)$ and RHS by $d x_1$ respectively) and integrating both sides:
+
+// $
+//   frac(d h, d x_1) &= (mu x_1 - x_1^3) / h(x_1) \
+//   arrow.l.r.double quad quad quad quad
+//   h(x_1) d h &= (mu x_1 - x_1^3) d x_1 \
+//   arrow.l.r.double quad quad quad
+//   ∫ h(x_1) d h &= ∫ (mu x_1 - x_1^3) d x_1 \
+//   arrow.l.r.double quad quad quad quad
+//   1/2 h(x_1)^2 &= 1/2 mu x_1^2 - 1/4 x_1^4 + C \
+//   arrow.l.r.double quad quad quad quad
+//   h(x_1)^2 &= mu x_1^2 - 1/2 x_1^4 + 2C
+// $<eq:1d_homoclinic_solution_integral>
+
+// Where $C in RR$ is the integration constant.
+
+// Since we require that the homoclinic orbit passes through the origin, we know that $h(0)=0$. And as $x_1$ for all $x^*_(0,1,2)$, we plug in $h(0)^2 = 2C = 0$ from @eq:1d_homoclinic_solution_integral to solve for $C=0$. Therefore:
+
+// $
+//   h(x_1)^2 &= mu x_1^2 - 1/2 x_1^4 \
+//   h(x_1) &= plus.minus x_1 sqrt(mu - frac(x_1^2, 2)) \
+// $<eq:1d_homoclinic_solution>
+
+// For the first quadrant, we take the positive root, yielding the homoclinic orbit function:
+
+// $
+//   h(x_1)^+ = x_1 sqrt(mu - frac(x_1^2, 2)) quad quad forall x_1 in [0, sqrt(2 mu)]
+// $
+
+// Note that we can interpret the maximum possible value for $x_1 = sqrt(2 mu)$ (for the root to ne non-negative) as the turning point of the homoclinic orbit in the first quadrant, after which it returns to the origin along the stable manifold along the orbit on the fourth quadrant ($x_1 >0, x_2 < 0$). Thus it starts at the origin $h(x_1=0)=0$ and transitions into the fourth quadrant at $h(x_1 = sqrt(2 mu))=0$, see @fig:1c_numerical.
 
 == Plotting the Homoclinic Orbit (1st quadrant) <sec:1e>
 
 #figure(
-  image("../img/1_e_homoclinic_orbit.png",
+  image("../img/1_e.png",
   height: 8cm),
-  caption: [Plot of the homoclinic orbit $x_2 = h(x_1)$ from @eq:1d_homoclinic_solution for $mu>0$. The orbit starts and ends at the saddle point at the origin $(0,0)$, forming a closed loop around the other critical points.],
+  caption: [Plot of the homoclinic orbit $x_2 = h(x_1)$ from @eq:1d_invariance_condition for $mu>0$. The orbit starts and ends at the saddle point at the origin $(0,0)$, forming a closed loop around the other critical points.],
 )<fig:1e>
+
+
 
 - comment on the plot?!
 
