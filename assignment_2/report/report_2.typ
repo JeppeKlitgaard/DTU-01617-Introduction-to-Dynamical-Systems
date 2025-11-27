@@ -139,7 +139,7 @@ Which indicates that the vector field is symmetric with respect to the $x_2$ axi
 
 In order to gauge the stability of the critical point, we employ the stability theory presented in @perko[Chapter 2.9], where Definition 1 defines stability as:
 
-*Definition 1*: Let $vv(ϕ)_t$ denote the flow of the differential equation $dot(vv(x)) = vv(f(vv(x)))$ defined for all $t ∈ ℝ$. An equilibrium point $vv(x)_0$ is _stable_ if for all $ε > 0$ there exists a $δ > 0$ such that for all $vv(x) ∈ N_ε (vv(x)_0)$ we have
+*Definition 1*: Let $vv(ϕ)_t$ denote the flow of the differential equation $dot(vv(x)) = vv(f(vv(x)))$ defined for all $t ∈ ℝ$. An equilibrium point $vv(x)_0$ is _stable_ if for all $ε > 0$ there exists a $δ > 0$ such that for all $vv(x) ∈ N_δ (vv(x)_0)$ we have
 $
   vv(ϕ)_t (vv(x)) ∈ N_ε (vv(x)_0)
 $
@@ -354,14 +354,18 @@ $
   &⇕\
   h(x_1) dif h &= (μ x_1 - x_1^3) dif x_1\
   &⇕\
-  h(x_1)^2 &= μ x_1^2 - 1/2 x_1^4 + C^2\
+  integral h(x_1) dif h &= integral (μ x_1 - x_1^3) dif x_1\
   &⇕\
-  h(x_1) &= cancel(±)sqrt(μ x_1^2 - 1/2 x_1^4 + C^2)\
+  1/2 h(x_1)^2 &= μ/2 x_1^2 - 1/4 x_1^4 + C^2\
+  &⇕\
+  h(x_1)^2 &= μ x_1^2 - 1/2 x_1^4 + 2C^2\
+  &⇕\
+  h(x_1) &= cancel(±)sqrt(μ x_1^2 - 1/2 x_1^4 + 2C^2)\
 $
 
 Where $C in RR$ is the integration constant and the negative root is discarded on the grounds that $x_2 > 0$ if we restrict ourselves to the first quadrant of the phase plane.
 
-Since we require that the homoclinic orbit passes through the origin, we impose $h(0) = 0 = sqrt(0+0+C^2) = 0$, thus yielding the particular solution:
+Since we require that the homoclinic orbit passes through the origin, we impose $h(0) = 0 = sqrt(0+0+2C^2) = 0$, thus yielding the particular solution:
 $
 h(x_1) = x_1 sqrt(μ - 1/2 x_1^2) wider x_1 in [0, sqrt(2 μ)]
 $ <eq:1d_homoclinic_solution>
