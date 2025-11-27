@@ -489,59 +489,69 @@ We observe that the critical point at the origin $(0,0)$ transitions from a stab
 The bifurcation observed in @fig:2a from Duffing equation from @eq:1_duffing_original as the parameter $mu$ crosses zero is an architypical example of a *pitchfork bifurcation*~@perko[Chapter 4.2, Figure 6], sometimes referred to as a *supercritical pitchfork bifurcation* in other literature, where supercriticality indicates that as the bifurcation parameter $mu$ passes through a transition value, here $mu=0$, a single center stable critical point at the origin $(0,0)$ for $mu<0$ becomes an unstable saddle point for $mu>0$, and two new stable critical points (at $(plus.minus sqrt(mu), 0)$) emerge symmetrically on either side of the original point.
 
 == Hyperbolicity for bifurcation transition $mu=0$ <sec:2c>
-At $mu=0$ all eigenvalues of the Jacobian at the critical point
-
+We determine the hyperbolicity of the system at $mu=0$ by computing the Jacobian:
 $
-  x^*_0 arrow D_f(x^*_0) = D_f(0,0) = mat(0, 1; 0, 0)
+  D f(x^*_0) = D f(0,0) = mat(0, 1; -3x_1^2, 0) = mat(0, 1; 0, 0)
 $
 
-are zero, i.e. $lambda_(1,2) = 0$, it has algebraic multiplicity of two at $0$. This indicates that the critical point is non-hyperbolic at the bifurcation point $mu=0$. Hence, the linearization theorem that requires hyperbolicity does not apply here, and we cannot draw conclusions about the stability of the critical point based solely on the linearized system.
+Of which we may determine the eigenvalues by solving the characteristic polynomial:
+$
+  p_(x^*_0)(λ) = det(D f(x^*_0) - λ I) = λ^2 = 0 ⇒ λ_(1,2) = 0
+$
+
+Clearly, this is non-hyperbolic, as hyperbolicity requires that all eigenvalues have non-zero real parts.
+
+It follows that the critical point is non-hyperbolic at the bifurcation point $mu=0$. Hence, the Hartman-Grobman Theorem~@perko[Chapter 2.8] does not apply here, and we cannot draw conclusions about the stability of the critical point based solely on the linearized system.
 
 == Lyapunov Stability for non-hyperbolic case <sec:2d>
-As we determined in @sec:2c, the critical point $x^*_0$ at the bifurcation point $mu=0$ is non-hyperbolic and we cannot conclude stability from the linearized system alone. Hence, we can use a Lyapunov function to analyse the stability of this critical point. A very common first guess is the simple quadratic form $V(x_1, x_2) = x_1^2 + x_2^2$. Another common choice is the energy function; in this case a natural candidate, since the system can be interpreted as a mechanical oscillator.
+As we determined in @sec:2c, the critical point $x^*_0$ at the bifurcation point $mu=0$ is non-hyperbolic and we cannot conclude stability from the linearized system alone. Hence, we can again apply the theorems of @perko[Chapter 2.10] as done for the non-hyperbolic cases in @sec:1b.
 
+We recall the chosen Liapunov function from @eq:1_hamiltonian:
 $
-  V(x_1, x_2) = frac(1,2) x_2^2 + frac(1,4) x_1^4
-$<eq:2d_lyapunov_function>
+  V (x_1, x_2) = 1/2 x_2^2 -  cancel(1/2 mu x_1^2) + 1/4 x_1^4
+$ <eq:2d_lyapunov_function>
 
-The Lyapunov function needs to be positive definite, i.e. $V(x_1, x_2) > 0$ for all $(x_1, x_2) ≠ (0,0)$ and $V(0,0) = 0$. This is satisfied for @eq:2d_lyapunov_function, as both terms are squares and thus non-negative, and the only point where $V$ is zero is at the origin.
+//  a Lyapunov function to analyse the stability of this critical point. A very common first guess is the simple quadratic form $V(x_1, x_2) = x_1^2 + x_2^2$. Another common choice is the energy function; in this case a natural candidate, since the system can be interpreted as a mechanical oscillator.
+
+// $
+//   V(x_1, x_2) = frac(1,2) x_2^2 + frac(1,4) x_1^4
+// $<eq:2d_lyapunov_function>
+
+// The Lyapunov function needs to be positive definite, i.e. $V(x_1, x_2) > 0$ for all $(x_1, x_2) ≠ (0,0)$ and $V(0,0) = 0$. This is satisfied for @eq:2d_lyapunov_function, as both terms are squares and thus non-negative, and the only point where $V$ is zero is at the origin.
 
 Next, we compute the time derivative of $V$ along the trajectories / solutions $x_1(t), x_2(t)$ of the system $bold(f)$ for $mu=0$:
 
 $
   dot(V)(x_1(t), x_2(t)) &= nabla_t V(x_1(t), x_2(t)) (dot(x)_1(t), dot(x)_2(t)) quad quad "via chain rule"\
-  &= partial V_(x_1) dot(x)_1 + partial V_(x_2) dot(x)_2
+  &= pdv(V, x_1) dot(x)_1 + pdv(V, x_2) dot(x)_2
   quad quad quad quad quad quad quad quad
   "inserting into function"\
   &= x_1^3 dot(x)_1 + x_2 dot(x)_2 \
   &= x_1^3 x_2 + x_2 (mu - x_1^3) \
   &= x_1^3 x_2 + x_2 (- x_1^3) \
-  &equiv 0
+  &= 0
 $
 
-Since $V$ is positive definite and $dot(V)≡0$, we can interpret that the energy in the system stays constant along each trajectory. That means, trajectories are contained within their (energy-)level-set of the Lyapunov function.
-Thus, the origin $(x_1, x_2) = (0,0)$ at $mu=0$ is Lyapunov (stable): small initial conditions remain small for all time.
-However, because $dot(V)$ is identically zero (not negative definite), one cannot conclude asymptotic stability. In fact, the origin is not asymptotically stable (solutions near origin are periodic orbits—center behavior, similar to the linear centers $x^*_(1,2)$ with purely imaginary Eigenvalues in the linearized system).
+Since the requirements of @perko[Chapter 2.9, Theorem 3] given in @eq:1_liapunov_requirements are satisfied,
+we may again leverage this theorem alongside the conclusion that $dot(V) = 0$ to determine the stability of the critical point at the origin for $mu=0$ as _stable_ or _Lyapunov stable_, but not _asymptotically stable_, which would require $dot(V) < 0$.
 
-So, the origin is a stable center (Lyapunov stable) but not asymptotically stable.
-
+As such, the origin is a stable center (Lyapunov stable), but not asymptotically stable.
 
 == Contour Plot of Lyapunov Function <sec:2e>
 
 #figure(
   image("../img/2_e_contourV_phase.png",
   height: 8cm),
-  caption: [Contour plot of the Lyapunov function $V(x_1, x_2)$ from @eq:2d_lyapunov_function for $mu=0$. The contours represent level sets of constant energy in the system. Overlay over the phase plot with vector field arrows.],
+  caption: [Contour plot of the Lyapunov function $V(x_1, x_2)$ from @eq:2d_lyapunov_function for $mu=0$. The contours represent level sets of constant energy in the system. The plot is overlaid with vector field arrows.],
 )<fig:2e>
 
-As clearly visible in @fig:2e, the contours of the Lyapunov function $V(x_1, x_2)$ from @eq:2d_lyapunov_function represent not only level sets of constant energy but also trajectories as solutions of the system @eq:1_duffing_original for $mu=0$. This is consistent with our earlier analysis in @sec:2d, where we found that the time derivative of the Lyapunov function $dot(V)$ is identically zero along trajectories, indicating that energy remains constant.
+As clearly visible in @fig:2e, the contours of the Lyapunov function $V(x_1, x_2)$ from @eq:2d_lyapunov_function represent not only level sets of constant energy but also trajectories as solutions of the system @eq:1_duffing_original for $mu=0$. This is consistent with our earlier analysis in @sec:2d, where we found that the time derivative of the Lyapunov function $dot(V)$ is identically zero along trajectories, indicating that energy is conserved.
 
-*REVIEW*
 Further we observe, that the level sets along with trajectories of the vector field form elliptical closed orbits around the origin. The elliptical shape could be attributed to the stretch of the system along the $x_1$-axis, due to the quartic term in $V$ (@eq:2d_lyapunov_function), compared to only the quadratic term for $x_2$.
 
 
 == Stability for $(0,0)$ at $mu=0$<sec:2f>
-The required Theorem from @perko[Chapther 2.11, p.151, Theorem 2] states:
+The required theorem from @perko[Chapter 2.11, p.151, Theorem 2] states:
 
 For when matrix $A$ of a linearized system has two zero eigenvalues, i.e. $det(A) = tr(A) = 0$, but $A≠0$, the system can be put into a 'normal' form:
 
@@ -552,16 +562,22 @@ $<eq:2f_perko_normal_form>
 
 where $h(x), g(x), R(x,y)$ are analytic in the neighborhood of the origin with $h(0) = g(0) = 0$ and $k ≥ 2, n ≥ 1$.
 
-#quote(attribution: [Perko])[
-  *Theorem 2* \
-  Let $k= 2m+1$ with $m ≥1$ in @eq:2f_perko_normal_form and let $lambda = b_n^2 + 4(m+1) a_k$. Then if $a_k > 0$, the origin is a topological saddle. If $a_k < 0$, the origin is \
-  (1) a focus or a center if $b_n=0$ and also if $b_n≠0$ and $n>m$ or if $n=m$ and $lambda < 0$, \
-  (2) a node if $b_n ≠ 0$, $n$ is an even number and $n < m$ and also if $b_n ≠ 0$, $n$ is an even number, $n =m$ and $lambda ≥0$ and \
-  (3) a critical point with an elliptic domain if $b_n ≠ 0$, $n$ is an odd number and $n < m$ and also if $b_n ≠ 0$, $n$ is an odd number, $n =m$ and $lambda ≥ 0$.
-]
+=== Perko Theorem @perko[Chapter 2.11, P. 151, Theorem 2]
 
-From this theorem, we can conclude that our system @eq:1_duffing_original at the critical point $(0,0)$ for $mu=0$ can be transformed into the normal form @eq:2f_perko_normal_form with: $k=3, a_k=-1, b_n=0, h(x)=0, R(x,y)=0$
+Let $k= 2m+1$ with $m ≥1$ in @eq:2f_perko_normal_form and let $lambda = b_n^2 + 4(m+1) a_k$. Then if $a_k > 0$, the origin is a topological saddle. If $a_k < 0$, the origin is \
+(1) a focus or a center if $b_n=0$ and also if $b_n≠0$ and $n>m$ or if $n=m$ and $lambda < 0$, \
+(2) a node if $b_n ≠ 0$, $n$ is an even number and $n < m$ and also if $b_n ≠ 0$, $n$ is an even number, $n =m$ and $lambda ≥0$ and \
+(3) a critical point with an elliptic domain if $b_n ≠ 0$, $n$ is an odd number and $n < m$ and also if $b_n ≠ 0$, $n$ is an odd number, $n =m$ and $lambda ≥ 0$.
 
-Thus, we have a focus or a center according to case (1) in the theorem, which is consistent with our earlier findings in @sec:2d using the Lyapunov function, where we concluded that the origin is a stable center (Lyapunov stable) but not asymptotically stable.
+From this theorem, we can conclude that our system @eq:1_duffing_original at the critical point $(0,0)$ for $mu=0$ can be transformed into the normal form @eq:2f_perko_normal_form with:
+$
+k &= 3\
+a_k &= -1\
+b_n &= 0\
+h(x) &= 0\
+R(x, y) &= 0\
+$
+
+Thus, we have a focus or a center according to case (1) in the theorem, which is consistent with our earlier findings in @sec:2d using the Lyapunov function, where we concluded that the origin is a stable center (Lyapunov stable) but not asymptotically stable. The theorem is notably _not_ able to distinguish between a focus and a center in this case.
 
 #bibliography("refs.bib")
