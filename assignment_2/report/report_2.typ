@@ -356,16 +356,16 @@ $
   &⇕\
   integral h(x_1) dif h &= integral (μ x_1 - x_1^3) dif x_1\
   &⇕\
-  1/2 h(x_1)^2 &= μ/2 x_1^2 - 1/4 x_1^4 + C^2\
+  1/2 h(x_1)^2 &= μ/2 x_1^2 - 1/4 x_1^4 + C\
   &⇕\
-  h(x_1)^2 &= μ x_1^2 - 1/2 x_1^4 + 2C^2\
+  h(x_1)^2 &= μ x_1^2 - 1/2 x_1^4 + 2C\
   &⇕\
-  h(x_1) &= cancel(±)sqrt(μ x_1^2 - 1/2 x_1^4 + 2C^2)\
+  h(x_1) &= cancel(±)sqrt(μ x_1^2 - 1/2 x_1^4 + 2C)\
 $
 
 Where $C in RR$ is the integration constant and the negative root is discarded on the grounds that $x_2 > 0$ if we restrict ourselves to the first quadrant of the phase plane.
 
-Since we require that the homoclinic orbit passes through the origin, we impose $h(0) = 0 = sqrt(0+0+2C^2) = 0$, thus yielding the particular solution:
+Since we require that the homoclinic orbit passes through the origin, we impose $h(0) = 0 = sqrt(0+0+2C) = 0$, thus yielding the particular solution:
 $
 h(x_1) = x_1 sqrt(μ - 1/2 x_1^2) wider x_1 in [0, sqrt(2 μ)]
 $ <eq:1d_homoclinic_solution>
