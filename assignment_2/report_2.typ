@@ -318,14 +318,14 @@ Using the results from @sec:1b, we can sketch the phase portraits for both cases
 The homoclinic orbit shown in purple can be observed encircling the stable centres at $(±sqrt(μ), 0)$ and crossing at the saddle point in $(0, 0)$.
 
 #figure(
-  image("../img/1_c_sketch.jpg", height: 6cm),
+  image("img/1_c_sketch.jpg", height: 6cm),
   caption: [Sketch of the phase plane of vector field $vv(f)$ from @eq:1_duffing_original for $μ > 0$ (left) and $μ < 0$ (right).],
 )<fig:1c_sketch>
 
 We additionally plot the numerically computed phase portraits rendered using Python's `matplotlib` library as shown in @fig:1c_numerical, which confirms our qualitative sketches from @fig:1c_sketch.
 
 #figure(
-  image("../img/1_c_numerical.png"),
+  image("img/1_c_numerical.png"),
   caption: [Sketch of the phase portrait of vector field $vv(f)$ from @eq:1_duffing_original for $mu > 0$ (left) and $mu < 0$ (right). Critical points are marked in red (saddles) and blue (centers). Arrows indicate the flow of the system.],
 )<fig:1c_numerical>
 
@@ -356,16 +356,16 @@ $
   &⇕\
   integral h(x_1) dif h &= integral (μ x_1 - x_1^3) dif x_1\
   &⇕\
-  1/2 h(x_1)^2 &= μ/2 x_1^2 - 1/4 x_1^4 + C^2\
+  1/2 h(x_1)^2 &= μ/2 x_1^2 - 1/4 x_1^4 + C\
   &⇕\
-  h(x_1)^2 &= μ x_1^2 - 1/2 x_1^4 + 2C^2\
+  h(x_1)^2 &= μ x_1^2 - 1/2 x_1^4 + 2C\
   &⇕\
-  h(x_1) &= cancel(±)sqrt(μ x_1^2 - 1/2 x_1^4 + 2C^2)\
+  h(x_1) &= cancel(±)sqrt(μ x_1^2 - 1/2 x_1^4 + 2C)\
 $
 
 Where $C in RR$ is the integration constant and the negative root is discarded on the grounds that $x_2 > 0$ if we restrict ourselves to the first quadrant of the phase plane.
 
-Since we require that the homoclinic orbit passes through the origin, we impose $h(0) = 0 = sqrt(0+0+2C^2) = 0$, thus yielding the particular solution:
+Since we require that the homoclinic orbit passes through the origin, we impose $h(0) = 0 = sqrt(0+0+2C) = 0$, thus yielding the particular solution:
 $
 h(x_1) = x_1 sqrt(μ - 1/2 x_1^2) wider x_1 in [0, sqrt(2 μ)]
 $ <eq:1d_homoclinic_solution>
@@ -455,7 +455,7 @@ Lastly we note that while the homoclinic orbit is closed, it takes infinite time
 == Plotting the Homoclinic Orbit (1st quadrant) <sec:1e>
 
 #figure(
-  image("../img/1_e.png",
+  image("img/1_e.png",
   height: 8cm),
   caption: [Plot of the homoclinic orbit $x_2 = h(x_1)$ from @eq:1d_invariance_condition for $mu>0$. The orbit starts and ends at the saddle point at the origin $(0,0)$, forming a closed loop around the other critical points.],
 )<fig:1e>
@@ -488,7 +488,7 @@ As our analysis in @sec:1 showed, the parameter $mu$ in the Duffing equation fro
 With this, we are able to sketch a bifurcation diagram illustrating how the critical points of the system change as the bifurcation parameter $mu$ varies as shown in @fig:2a_sketch.
 
 #figure(
-  image("../img/2_a_sketch.jpg",
+  image("img/2_a_sketch.jpg",
   height: 6cm),
   caption: [Sketch of the bifurcation diagram illustrating the emergence of critical points in the Duffing equation from @eq:1_duffing_original as the bifurcation parameter $mu$ varies. Blue lines indicate centers, whereas the purple line indicates a saddle point.],
 ) <fig:2a_sketch>
@@ -496,7 +496,7 @@ With this, we are able to sketch a bifurcation diagram illustrating how the crit
 Additionally, we plot the numerically computed bifurcation diagram rendered using Python's `matplotlib` library as shown in @fig:2a, which confirms our qualitative sketch from @fig:2a_sketch.
 
 #figure(
-  image("../img/2_a_numerical.png",
+  image("img/2_a_numerical.png",
   height: 8cm),
   caption: [Bifurcation diagram illustrating the emergence of critical points in the Duffing equation from @eq:1_duffing_original as the bifurcation parameter $mu$ varies.],
 )<fig:2a>
@@ -559,7 +559,7 @@ As such, the origin is a stable center (Lyapunov stable), but not asymptotically
 == Contour Plot of Lyapunov Function <sec:2e>
 
 #figure(
-  image("../img/2_e_contourV_phase.png",
+  image("img/2_e_contourV_phase.png",
   height: 8cm),
   caption: [Contour plot of the Lyapunov function $V(x_1, x_2)$ from @eq:2d_lyapunov_function for $mu=0$. The contours represent level sets of constant energy in the system. The plot is overlaid with vector field arrows.],
 )<fig:2e>
