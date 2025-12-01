@@ -397,6 +397,21 @@ Lastly we note that while the homoclinic orbit is closed, it takes infinite time
 // $
 //   frac(d x_2, d x_1) = frac(dot(x)_2, dot(x)_1) = frac(f_2(x_1, x_2), f_1(x_1, x_2)) = frac(mu x_1 - x_1^3, x_2) = frac(mu x_1 - x_1^3, h(x_1)) = frac(d h, d x_1)
 // $<eq:1d_homoclinic_graph_condition>
+// 
+// To clarify:
+// $
+//  dot(x_2) = d/dt h(x_1) = h'(x_1) dot(x_1) <=> dot(x_2)/dot(x_1) = h'(x_1)
+// $
+// and 
+// $
+//  h'(x_1) = dh(x_1)/dx_1
+// $ 
+// and $h(x_1) = x_2$, so 
+// $
+//  dot(x_2)/dot(x_1) = dx_2 / dx_1
+// $
+// 
+// Note that $dot(h)$ is the notation for time-derivative and $h'$ is the notation for the state-variable derivative $h' = d/dx_1 h(x_1)$. Beware that $dot(x_2)/dot(x_1) ≠ d x_2 / d x_1$ in general, but along the curve $x_2 = h(x_1)$ they are equal.
 
 // Hence, we can derive the first order ODE for $h(x_1)$:
 
